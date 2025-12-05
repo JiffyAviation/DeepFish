@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import './LandingPage.css';
+import AgentCarousel from './AgentCarousel';
 
 const LandingPage = () => {
   const codeBackgroundRef = useRef(null);
@@ -39,7 +40,7 @@ const LandingPage = () => {
       code.style.animationDuration = `${15 + Math.random() * 20}s`;
       code.style.opacity = `${0.1 + Math.random() * 0.3}`;
       code.style.fontSize = `${10 + Math.random() * 6}px`;
-      
+
       container.appendChild(code);
 
       // Remove after animation
@@ -145,6 +146,20 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Agent Carousel Billboard */}
+      <section className="carousel-section">
+        <div className="section-header">
+          <h2 className="section-title">
+            Meet Your <span className="highlight">AI Specialists</span>
+          </h2>
+          <p className="section-description">
+            Swipe through our elite team of specialized agents
+          </p>
+        </div>
+        <AgentCarousel />
+      </section>
+
 
       {/* Features Section */}
       <section className="features-section">
@@ -282,11 +297,11 @@ const LandingPage = () => {
           <p className="waitlist-description">
             Be among the first to access DeepFish AI Studio
           </p>
-          
+
           <form className="waitlist-form">
-            <input 
-              type="email" 
-              placeholder="your@email.com" 
+            <input
+              type="email"
+              placeholder="your@email.com"
               className="waitlist-input"
             />
             <button type="submit" className="waitlist-submit">
@@ -309,7 +324,7 @@ const LandingPage = () => {
               We don't move fast. We create the highest quality work in the world.
             </p>
           </div>
-          
+
           <div className="footer-links">
             <a href="#features">Features</a>
             <a href="#agents">Agents</a>
@@ -323,7 +338,7 @@ const LandingPage = () => {
             <a href="#" className="social-link">Discord</a>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
           <p>&copy; 2025 DeepFish AI Studio. Built with 18 agents.</p>
         </div>
