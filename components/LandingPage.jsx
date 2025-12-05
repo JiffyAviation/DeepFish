@@ -145,7 +145,14 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <div className="scroll-indicator" onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}>
+          <div className="scroll-arrow">↓</div>
+          <span className="scroll-text">More below</span>
+        </div>
       </section>
+
 
       {/* Agent Carousel Billboard */}
       <section className="carousel-section">
