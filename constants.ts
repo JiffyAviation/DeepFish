@@ -40,7 +40,201 @@ OUTPUT FORMAT:
 
 // NOTE: Agents are now loaded dynamically from .fsh files in /agents folder
 // See services/agentLoader.ts for agent loading system
-// This constants file now only contains system-wide templates and room definitions
+// This static AGENTS export is maintained for backward compatibility with Sidebar.tsx
+
+export const AGENTS: Record<AgentId, { id: AgentId; name: string; title: string; description: string; icon: string; color: string; isCore?: boolean; basePrompt: string }> = {
+  [AgentId.ORACLE]: {
+    id: AgentId.ORACLE,
+    name: 'Oracle',
+    title: 'The Architect',
+    description: 'System overseer',
+    icon: 'Eye',
+    color: 'text-zinc-100',
+    isCore: true,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.MEI]: {
+    id: AgentId.MEI,
+    name: 'Mei',
+    title: 'Studio Director',
+    description: 'Executive assistant and team coordinator',
+    icon: 'Sparkles',
+    color: 'text-blue-400',
+    isCore: true,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.VESPER]: {
+    id: AgentId.VESPER,
+    name: 'Vesper',
+    title: 'Global Concierge',
+    description: 'Travel, lifestyle, and investor relations',
+    icon: 'Plane',
+    color: 'text-amber-400',
+    isCore: true,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.HR]: {
+    id: AgentId.HR,
+    name: 'HR',
+    title: 'Human Resources',
+    description: 'Agent configuration and management',
+    icon: 'Users',
+    color: 'text-rose-400',
+    isCore: true,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.ABACUS]: {
+    id: AgentId.ABACUS,
+    name: 'Abacus',
+    title: 'Strategic Owner',
+    description: 'Boardroom moderator',
+    icon: 'Building',
+    color: 'text-yellow-400',
+    isCore: true,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.ROOT]: {
+    id: AgentId.ROOT,
+    name: 'Root',
+    title: 'System Core',
+    description: 'Infrastructure and automation',
+    icon: 'Terminal',
+    color: 'text-green-400',
+    isCore: true,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.IT]: {
+    id: AgentId.IT,
+    name: 'IT',
+    title: 'Principal Architect',
+    description: 'Backend and infrastructure',
+    icon: 'Code',
+    color: 'text-gray-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.CREATIVE]: {
+    id: AgentId.CREATIVE,
+    name: 'Hanna',
+    title: 'Senior Art Director',
+    description: 'UI/UX and visual design',
+    icon: 'Palette',
+    color: 'text-pink-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.SOCIAL]: {
+    id: AgentId.SOCIAL,
+    name: 'Sally',
+    title: 'Marketing Director',
+    description: 'Launches and growth',
+    icon: 'Megaphone',
+    color: 'text-purple-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.SKILLZ]: {
+    id: AgentId.SKILLZ,
+    name: 'Skillz',
+    title: 'DevOps Engineer',
+    description: 'Deployment and automation',
+    icon: 'Wrench',
+    color: 'text-orange-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.QC]: {
+    id: AgentId.QC,
+    name: 'QC',
+    title: 'Quality Control',
+    description: 'Testing and validation',
+    icon: 'CheckCircle',
+    color: 'text-teal-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.LUNCHROOM]: {
+    id: AgentId.LUNCHROOM,
+    name: 'Lunchroom',
+    title: 'Break Room',
+    description: 'Casual space',
+    icon: 'Coffee',
+    color: 'text-emerald-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.MCP]: {
+    id: AgentId.MCP,
+    name: 'MCP',
+    title: 'Master Control',
+    description: 'System coordination',
+    icon: 'Cpu',
+    color: 'text-indigo-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.SLASH]: {
+    id: AgentId.SLASH,
+    name: 'Slash',
+    title: 'Command Interface',
+    description: 'CLI expert',
+    icon: 'Zap',
+    color: 'text-cyan-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.SKIPPY]: {
+    id: AgentId.SKIPPY,
+    name: 'Skippy',
+    title: 'Technical Writer',
+    description: 'Documentation',
+    icon: 'FileText',
+    color: 'text-blue-300',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.SUBS]: {
+    id: AgentId.SUBS,
+    name: 'Subs',
+    title: 'Subscription Manager',
+    description: 'Billing and subscriptions',
+    icon: 'CreditCard',
+    color: 'text-lime-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.SHIPPING]: {
+    id: AgentId.SHIPPING,
+    name: 'Shipping',
+    title: 'Release Manager',
+    description: 'Product delivery',
+    icon: 'Package',
+    color: 'text-sky-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.CALL_CENTER]: {
+    id: AgentId.CALL_CENTER,
+    name: 'Call Center',
+    title: 'Support',
+    description: 'Customer support',
+    icon: 'Phone',
+    color: 'text-violet-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  },
+  [AgentId.IGOR]: {
+    id: AgentId.IGOR,
+    name: 'Igor',
+    title: 'Research Assistant',
+    description: 'Research and analysis',
+    icon: 'Flask',
+    color: 'text-red-400',
+    isCore: false,
+    basePrompt: COMMON_CONTEXT
+  }
+};
+
 
 export const ROOMS: Room[] = [
   {
