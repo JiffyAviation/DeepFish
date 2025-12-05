@@ -25,8 +25,18 @@ const EmailGate: React.FC<EmailGateProps> = ({ onSuccess }) => {
 
         setIsSubmitting(true);
 
+        // Temporarily bypass FormSubmit until we set it up properly
+        // Just store the email and show the landing page
+        localStorage.setItem('deepfish_email_submitted', 'true');
+        localStorage.setItem('deepfish_user_email', email);
+
+        // Show success and reveal landing page
+        setTimeout(() => {
+            onSuccess();
+        }, 800);
+
+        /* TODO: Add real email collection later
         try {
-            // Submit to FormSubmit.co
             const response = await fetch('https://formsubmit.co/ajax/jeffreyphoneLG@gmail.com', {
                 method: 'POST',
                 headers: {
@@ -41,11 +51,8 @@ const EmailGate: React.FC<EmailGateProps> = ({ onSuccess }) => {
             });
 
             if (response.ok) {
-                // Store in localStorage so they don't see gate again
                 localStorage.setItem('deepfish_email_submitted', 'true');
                 localStorage.setItem('deepfish_user_email', email);
-
-                // Show success and reveal landing page
                 setTimeout(() => {
                     onSuccess();
                 }, 1000);
@@ -57,6 +64,7 @@ const EmailGate: React.FC<EmailGateProps> = ({ onSuccess }) => {
             setError('Network error. Please try again.');
             setIsSubmitting(false);
         }
+        */
     };
 
     return (
