@@ -1,31 +1,27 @@
 
-import React, { useState, useCallback, useEffect } from 'react';
-import Sidebar from './components/Sidebar';
-import ChatArea from './components/ChatArea';
-import { Labs } from './components/Labs';
-import { GodMode } from './components/GodMode';
+import React, { useState, useEffect } from 'react';
 import EmailGate from './components/EmailGate';
 import LandingPage from './components/LandingPage';
-import { ROOMS, INITIAL_AGENTS } from './constants';
-import { useAgentEngine } from './hooks/useAgentEngine';
+
+// Lazy load the original AI Studio components only when needed
+// This prevents the Google Gemini API key error on initial page load
+const LazyOriginalApp = React.lazy(() => import('./OriginalApp'));
+
 
 const App: React.FC = () => {
   // Check if user has submitted email
   const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
-  const [showLandingPage, setShowLandingPage] = useState(false);
 
   useEffect(() => {
     // Check localStorage on mount
     const submitted = localStorage.getItem('deepfish_email_submitted');
     if (submitted === 'true') {
       setHasSubmittedEmail(true);
-      setShowLandingPage(true);
     }
   }, []);
 
   const handleEmailSuccess = () => {
     setHasSubmittedEmail(true);
-    setShowLandingPage(true);
   };
 
   // If they haven't submitted email, show the email gate
@@ -33,14 +29,11 @@ const App: React.FC = () => {
     return <EmailGate onSuccess={handleEmailSuccess} />;
   }
 
-  // If they submitted email, show the landing page
-  if (showLandingPage) {
-    return <LandingPage />;
-  }
-
-  // Original AI Studio app (not shown in this flow)
-  return <OriginalApp />;
+  // After email submission, show the landing page
+  return <LandingPage />;
 };
+
+export default App;
 
 // Original AI Studio component (kept for future use)
 const OriginalApp: React.FC = () => {
