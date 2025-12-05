@@ -1,13 +1,49 @@
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatArea from './components/ChatArea';
 import { Labs } from './components/Labs';
 import { GodMode } from './components/GodMode';
+import EmailGate from './components/EmailGate';
+import LandingPage from './components/LandingPage';
 import { ROOMS, INITIAL_AGENTS } from './constants';
 import { useAgentEngine } from './hooks/useAgentEngine';
 
 const App: React.FC = () => {
+  // Check if user has submitted email
+  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
+  const [showLandingPage, setShowLandingPage] = useState(false);
+
+  useEffect(() => {
+    // Check localStorage on mount
+    const submitted = localStorage.getItem('deepfish_email_submitted');
+    if (submitted === 'true') {
+      setHasSubmittedEmail(true);
+      setShowLandingPage(true);
+    }
+  }, []);
+
+  const handleEmailSuccess = () => {
+    setHasSubmittedEmail(true);
+    setShowLandingPage(true);
+  };
+
+  // If they haven't submitted email, show the email gate
+  if (!hasSubmittedEmail) {
+    return <EmailGate onSuccess={handleEmailSuccess} />;
+  }
+
+  // If they submitted email, show the landing page
+  if (showLandingPage) {
+    return <LandingPage />;
+  }
+
+  // Original AI Studio app (not shown in this flow)
+  return <OriginalApp />;
+};
+
+// Original AI Studio component (kept for future use)
+const OriginalApp: React.FC = () => {
   // Use The Engine
   const {
     agents,
@@ -47,24 +83,24 @@ const App: React.FC = () => {
   };
 
   const onSelectAgent = (agentId: string) => {
-      // Logic to switch to specific agent even if they don't have a room
-      setTempActiveAgentId(agentId);
-      // Find which room they are closest to, or just keep current room but switch agent context
-      // For UX, if they have a room, go there. If not, stay in current room but override agent.
-      const room = ROOMS.find(r => r.agentId === agentId);
-      if (room) {
-          setActiveRoomId(room.id);
-          setTempActiveAgentId(null);
-      }
-      setIsLabsOpen(false);
-      setGodModeAgentId(null);
-      setEditingAgentId(null);
+    // Logic to switch to specific agent even if they don't have a room
+    setTempActiveAgentId(agentId);
+    // Find which room they are closest to, or just keep current room but switch agent context
+    // For UX, if they have a room, go there. If not, stay in current room but override agent.
+    const room = ROOMS.find(r => r.agentId === agentId);
+    if (room) {
+      setActiveRoomId(room.id);
+      setTempActiveAgentId(null);
+    }
+    setIsLabsOpen(false);
+    setGodModeAgentId(null);
+    setEditingAgentId(null);
   };
 
   const handleEditAgent = (agentId: string) => {
-      setEditingAgentId(agentId);
-      setGodModeAgentId(null);
-      setIsLabsOpen(true);
+    setEditingAgentId(agentId);
+    setGodModeAgentId(null);
+    setIsLabsOpen(true);
   };
 
   // Updated to accept image
@@ -86,13 +122,13 @@ const App: React.FC = () => {
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
-            console.error(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
-        });
+      document.documentElement.requestFullscreen().catch(err => {
+        console.error(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+      });
     } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
     }
   };
 
@@ -103,8 +139,8 @@ const App: React.FC = () => {
     <div className={`flex h-screen w-full overflow-hidden transition-colors duration-500
         ${isOracleMode ? 'bg-black text-green-500' : 'bg-zinc-950 text-zinc-200'}
     `}>
-      
-      <Sidebar 
+
+      <Sidebar
         activeRoomId={activeRoom.isBoardroom ? 'boardroom' : activeRoom.id}
         activeAgentId={activeAgent.id}
         onSelectRoom={onSelectRoom}
@@ -124,19 +160,19 @@ const App: React.FC = () => {
       {/* Main Content Router */}
       <div className="flex-1 flex flex-col relative">
         {godModeAgentId ? (
-            <GodMode 
-                agent={agents[godModeAgentId]} 
-                onClose={() => setGodModeAgentId(null)}
-                onEdit={() => handleEditAgent(godModeAgentId)}
-            />
+          <GodMode
+            agent={agents[godModeAgentId]}
+            onClose={() => setGodModeAgentId(null)}
+            onEdit={() => handleEditAgent(godModeAgentId)}
+          />
         ) : isLabsOpen ? (
-          <Labs 
-            agents={agents} 
-            onCreateAgent={createNewAgent} 
+          <Labs
+            agents={agents}
+            onCreateAgent={createNewAgent}
             initialAgentId={editingAgentId}
           />
         ) : (
-          <ChatArea 
+          <ChatArea
             messages={messages}
             activeAgent={activeAgent}
             input={input}
@@ -154,15 +190,15 @@ const App: React.FC = () => {
             onSetMemoStatus={setMemoStatus}
           />
         )}
-        
+
         {/* Visual Indicator of Mei's Presence */}
         {!isOracleMode && !godModeAgentId && !isLabsOpen && (
-            <div className="absolute top-4 right-4 z-50 pointer-events-none">
+          <div className="absolute top-4 right-4 z-50 pointer-events-none">
             <div className="flex items-center gap-2 bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-zinc-800">
-                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
-                <span className="text-[10px] text-zinc-400 font-mono uppercase">Mei Online</span>
+              <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
+              <span className="text-[10px] text-zinc-400 font-mono uppercase">Mei Online</span>
             </div>
-            </div>
+          </div>
         )}
       </div>
     </div>
