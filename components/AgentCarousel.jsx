@@ -8,7 +8,7 @@ const FEATURED_AGENTS = [
     name: 'The Architect',
     title: 'Omniscient System',
     description: 'The Unseen Hand.',
-    icon: '👁️',
+    icon: '/Avatars/oracle.jpg',
     color: '#f0f0f0'
   },
   {
@@ -16,7 +16,7 @@ const FEATURED_AGENTS = [
     name: 'Hanna',
     title: 'Senior Art Director',
     description: 'UI/UX, Production Design, & Visual Assets.',
-    icon: '🎨',
+    icon: '/Avatars/hanna.jpg',
     color: '#ff6b6b'
   },
   {
@@ -24,7 +24,7 @@ const FEATURED_AGENTS = [
     name: 'Mei',
     title: 'Studio Director',
     description: 'Orchestrates the Elite Design Team. Quality Control.',
-    icon: '🌸',
+    icon: '/Avatars/mei.png',
     color: '#4ecdc4'
   },
   {
@@ -32,7 +32,7 @@ const FEATURED_AGENTS = [
     name: 'IT',
     title: 'Principal Architect',
     description: 'Backend & Infrastructure.',
-    icon: '💻',
+    icon: '/Avatars/Aitee.png',
     color: '#888888'
   },
   {
@@ -40,7 +40,7 @@ const FEATURED_AGENTS = [
     name: 'Vesper',
     title: 'Global Concierge',
     description: 'Real-world logistics, travel, & investor relations.',
-    icon: '✈️',
+    icon: '/Avatars/vesper.jpg',
     color: '#ffb86c'
   },
   {
@@ -48,7 +48,7 @@ const FEATURED_AGENTS = [
     name: 'ABACUS',
     title: 'Strategic Owner',
     description: 'Parent company. Boardroom Moderator.',
-    icon: '🏦',
+    icon: '/Avatars/Abacus.jpg',
     color: '#ffd700'
   }
 ];
@@ -70,23 +70,23 @@ const AgentCarousel = () => {
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    
+
     const diff = e.clientX - startX;
     setTranslateX(diff);
   };
 
   const handleMouseUp = () => {
     if (!isDragging) return;
-    
+
     setIsDragging(false);
-    
+
     // Threshold for page change (100px)
     if (translateX < -100 && currentPage < totalPages - 1) {
       setCurrentPage(prev => prev + 1);
     } else if (translateX > 100 && currentPage > 0) {
       setCurrentPage(prev => prev - 1);
     }
-    
+
     setTranslateX(0);
   };
 
@@ -127,7 +127,7 @@ const AgentCarousel = () => {
         </p>
       </div>
 
-      <div 
+      <div
         className="carousel-container"
         ref={carouselRef}
         onMouseDown={handleMouseDown}
@@ -138,7 +138,7 @@ const AgentCarousel = () => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div 
+        <div
           className={`carousel-track ${isDragging ? 'dragging' : ''}`}
           style={{ transform: getTransform() }}
         >
@@ -146,22 +146,18 @@ const AgentCarousel = () => {
             <div className="agents-grid">
               {FEATURED_AGENTS.map(agent => (
                 <div key={agent.id} className="agent-card-circle">
-                  <div 
+                  <div
                     className="agent-avatar-circle"
-                    style={{ 
+                    style={{
                       borderColor: agent.color,
                       boxShadow: `0 0 30px ${agent.color}40`
                     }}
                   >
-                    {/* Placeholder for AI-generated portrait */}
-                    <div className="avatar-placeholder">
-                      <span className="avatar-icon">{agent.icon}</span>
-                    </div>
-                    {/* Image will be: <img src={`/avatars/${agent.id}.png`} alt={agent.name} /> */}
+                    <img src={agent.icon} alt={agent.name} className="avatar-image" />
                   </div>
-                  
+
                   <div className="agent-info">
-                    <h3 
+                    <h3
                       className="agent-name"
                       style={{ color: agent.color }}
                     >
