@@ -235,6 +235,10 @@ export const AGENTS: Record<AgentId, { id: AgentId; name: string; title: string;
   }
 };
 
+// Alias for backward compatibility with App.tsx
+export const INITIAL_AGENTS = AGENTS;
+
+
 
 export const ROOMS: Room[] = [
   {
