@@ -27,7 +27,7 @@ const EmailGate: React.FC<EmailGateProps> = ({ onSuccess }) => {
 
         try {
             // Submit to FormSubmit.co
-            const response = await fetch('https://formsubmit.co/ajax/YOUR_EMAIL_HERE', {
+            const response = await fetch('https://formsubmit.co/ajax/jeffreyphoneLG@gmail.com', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
