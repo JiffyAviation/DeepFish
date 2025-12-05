@@ -1,11 +1,9 @@
 
+
 import React, { useState, useEffect } from 'react';
 import EmailGate from './components/EmailGate';
 import LandingPage from './components/LandingPage';
 
-// Lazy load the original AI Studio components only when needed
-// This prevents the Google Gemini API key error on initial page load
-const LazyOriginalApp = React.lazy(() => import('./OriginalApp'));
 
 
 const App: React.FC = () => {
