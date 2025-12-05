@@ -1,6 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './AgentCarousel.css';
 
+// Import avatar images
+import oracleAvatar from '../Avatars/oracle.jpg';
+import hannaAvatar from '../Avatars/hanna.jpg';
+import meiAvatar from '../Avatars/mei.png';
+import aiteeAvatar from '../Avatars/Aitee.png';
+import vesperAvatar from '../Avatars/vesper.jpg';
+import abacusAvatar from '../Avatars/Abacus.jpg';
+
 // First 6 agents from constants.ts
 const FEATURED_AGENTS = [
   {
@@ -8,7 +16,7 @@ const FEATURED_AGENTS = [
     name: 'The Architect',
     title: 'Omniscient System',
     description: 'The Unseen Hand.',
-    icon: '/Avatars/oracle.jpg',
+    icon: oracleAvatar,
     color: '#f0f0f0'
   },
   {
@@ -16,7 +24,7 @@ const FEATURED_AGENTS = [
     name: 'Hanna',
     title: 'Senior Art Director',
     description: 'UI/UX, Production Design, & Visual Assets.',
-    icon: '/Avatars/hanna.jpg',
+    icon: hannaAvatar,
     color: '#ff6b6b'
   },
   {
@@ -24,7 +32,7 @@ const FEATURED_AGENTS = [
     name: 'Mei',
     title: 'Studio Director',
     description: 'Orchestrates the Elite Design Team. Quality Control.',
-    icon: '/Avatars/mei.png',
+    icon: meiAvatar,
     color: '#4ecdc4'
   },
   {
@@ -32,7 +40,7 @@ const FEATURED_AGENTS = [
     name: 'IT',
     title: 'Principal Architect',
     description: 'Backend & Infrastructure.',
-    icon: '/Avatars/Aitee.png',
+    icon: aiteeAvatar,
     color: '#888888'
   },
   {
@@ -40,7 +48,7 @@ const FEATURED_AGENTS = [
     name: 'Vesper',
     title: 'Global Concierge',
     description: 'Real-world logistics, travel, & investor relations.',
-    icon: '/Avatars/vesper.jpg',
+    icon: vesperAvatar,
     color: '#ffb86c'
   },
   {
@@ -48,7 +56,7 @@ const FEATURED_AGENTS = [
     name: 'ABACUS',
     title: 'Strategic Owner',
     description: 'Parent company. Boardroom Moderator.',
-    icon: '/Avatars/Abacus.jpg',
+    icon: abacusAvatar,
     color: '#ffd700'
   }
 ];
