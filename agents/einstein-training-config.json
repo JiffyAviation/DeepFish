@@ -1,0 +1,37 @@
+{
+    "agent": "einstein",
+    "agentName": "Einstein",
+    "agentRole": "Theoretical Physicist",
+    "trainingStatus": "queued",
+    "trainingSources": [
+        {
+            "type": "youtube_channel",
+            "url": "https://www.youtube.com/@JuliaMcCoy/videos",
+            "channelName": "Julia McCoy",
+            "priority": "high",
+            "focus": [
+                "AI content strategy",
+                "Content creation",
+                "Innovation frameworks",
+                "Strategic thinking"
+            ],
+            "extractionMethod": "transcripts",
+            "updateFrequency": "weekly"
+        }
+    ],
+    "trainingParameters": {
+        "specialty": "theoretical_physics",
+        "contextWindow": "extended",
+        "learningStyle": "analytical",
+        "outputFormat": "detailed_explanations"
+    },
+    "oracleAssignment": {
+        "monitored": true,
+        "autoUpdate": true,
+        "reportingCadence": "monthly",
+        "notes": "Oracle watches this channel and queues new content for Einstein's training"
+    },
+    "deploymentTrigger": "ai_studio_online",
+    "createdDate": "2025-12-05",
+    "lastUpdated": "2025-12-05"
+}
