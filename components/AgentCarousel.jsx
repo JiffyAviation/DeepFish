@@ -58,6 +58,14 @@ const FEATURED_AGENTS = [
     description: 'Parent company. Boardroom Moderator.',
     icon: abacusAvatar,
     color: '#ffd700'
+  },
+  {
+    id: 'einstein',
+    name: 'Einstein',
+    title: 'Theoretical Physicist',
+    description: 'Complex systems, quantum mechanics, & breakthrough innovations.',
+    icon: '🧠', // Replace with avatar when ready: einsteinAvatar
+    color: '#9b59b6'
   }
 ];
 
