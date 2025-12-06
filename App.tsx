@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import EmailGate from './components/EmailGate';
 import LandingPage from './components/LandingPage';
 import AdminDashboard from './components/AdminDashboard';
-import './App.css';
+
 
 function App() {
   const [showEmailGate, setShowEmailGate] = useState(true);
