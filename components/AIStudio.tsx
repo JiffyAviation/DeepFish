@@ -6,6 +6,8 @@ import ChatArea from './ChatArea';
 import { Labs } from './Labs';
 import { GodMode } from './GodMode';
 import { GoogleGenerativeAI } from '@google/genai';
+import { generateId } from '../utils/ids';
+import { addMessageWithLimit } from '../utils/messageBuffer';
 
 const AIStudio = () => {
     const [activeRoomId, setActiveRoomId] = useState<string>('main');
@@ -18,14 +20,12 @@ const AIStudio = () => {
     const [godModeAgent, setGodModeAgent] = useState<string | null>(null);
     const [inbox, setInbox] = useState<ExecutiveMemo[]>([]);
 
-    const [roomMessages, setRoomMessages] = useState<Record<string, Message[]>>({
-        main: [],
-        creative: [],
-        technical: [],
-        executive: []
-    });
+    const [roomMessages, setRoomMessages] = useState<Record<string, Message[]>>(() =>
+        Object.fromEntries(ROOMS.map(r => [r.id, []]))
+    );
 
     const genAI = useRef<GoogleGenerativeAI | null>(null);
+    const abortControllerRef = useRef<AbortController | null>(null);
 
     useEffect(() => {
         const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
@@ -39,64 +39,114 @@ const AIStudio = () => {
     const messages = roomMessages[activeRoomId] || [];
 
     const handleSend = async (image?: string) => {
-        if (!input.trim() && !image) return;
+        const trimmedInput = input.trim();
+        if (!trimmedInput && !image) return;
+
         if (!genAI.current) {
+            console.error('[AIStudio] API key not configured');
             alert('API key not configured. Please add VITE_GOOGLE_API_KEY to Railway environment variables.');
             return;
         }
 
+        // Capture current state to prevent race conditions
+        const targetRoomId = activeRoomId;
+        const targetAgent = activeAgent;
+
+        // Generate unique ID (prevents collision)
+        const userMessageId = generateId();
+
         const userMessage: Message = {
-            id: Date.now().toString(),
+            id: userMessageId,
             role: Role.USER,
-            text: input,
+            text: trimmedInput,
             timestamp: new Date(),
             image
         };
 
-        setRoomMessages(prev => ({
-            ...prev,
-            [activeRoomId]: [...(prev[activeRoomId] || []), userMessage]
-        }));
+        // Add user message with 1000-message limit (prevents memory leak)
+        setRoomMessages(prev => {
+            const roomMsgs = prev[targetRoomId] || [];
+            const newMsgs = addMessageWithLimit(roomMsgs, userMessage, 1000);
+            return { ...prev, [targetRoomId]: newMsgs };
+        });
+
         setInput('');
         setIsLoading(true);
 
+        // Cancel previous request if exists
+        if (abortControllerRef.current) {
+            abortControllerRef.current.abort();
+        }
+
+        // Create new abort controller
+        const abortController = new AbortController();
+        abortControllerRef.current = abortController;
+
         try {
             const model = genAI.current.getGenerativeModel({ model: 'gemini-pro' });
-            const prompt = `${COMMON_CONTEXT}\n\n${isOracleMode ? ORACLE_OVERRIDE_PROMPT : ''}\n\nAgent: ${activeAgent.name}\n${activeAgent.basePrompt}\n\nUser: ${input}`;
+            const prompt = `${COMMON_CONTEXT}\n\n${isOracleMode ? ORACLE_OVERRIDE_PROMPT : ''}\n\nAgent: ${targetAgent.name}\n${targetAgent.basePrompt}\n\nUser: ${trimmedInput}`;
 
             const result = await model.generateContent(prompt);
+
+            // Check if aborted
+            if (abortController.signal.aborted) {
+                console.log('[AIStudio] Request aborted');
+                return;
+            }
+
             const response = await result.response;
             const text = response.text();
 
             const aiMessage: Message = {
-                id: (Date.now() + 1).toString(),
+                id: generateId(),
                 role: Role.MODEL,
                 text,
                 timestamp: new Date(),
-                agentId: activeAgent.id as AgentId
+                agentId: targetAgent.id as AgentId
             };
 
-            setRoomMessages(prev => ({
-                ...prev,
-                [activeRoomId]: [...(prev[activeRoomId] || []), aiMessage]
-            }));
-        } catch (error) {
-            console.error('Error:', error);
+            setRoomMessages(prev => {
+                const roomMsgs = prev[targetRoomId] || [];
+                const newMsgs = addMessageWithLimit(roomMsgs, aiMessage, 1000);
+                return { ...prev, [targetRoomId]: newMsgs };
+            });
+
+        } catch (error: any) {
+            // Don't show error if request was aborted
+            if (error.name === 'AbortError' || abortController.signal.aborted) {
+                console.log('[AIStudio] Request cancelled');
+                return;
+            }
+
+            console.error('[AIStudio] Error:', error);
+
             const errorMessage: Message = {
-                id: (Date.now() + 1).toString(),
+                id: generateId(),
                 role: Role.MODEL,
                 text: 'Sorry, there was an error processing your request.',
                 timestamp: new Date(),
                 isError: true
             };
-            setRoomMessages(prev => ({
-                ...prev,
-                [activeRoomId]: [...(prev[activeRoomId] || []), errorMessage]
-            }));
+
+            setRoomMessages(prev => {
+                const roomMsgs = prev[targetRoomId] || [];
+                const newMsgs = addMessageWithLimit(roomMsgs, errorMessage, 1000);
+                return { ...prev, [targetRoomId]: newMsgs };
+            });
         } finally {
             setIsLoading(false);
+            abortControllerRef.current = null;
         }
     };
+
+    // Cleanup: abort pending requests on unmount
+    useEffect(() => {
+        return () => {
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort();
+            }
+        };
+    }, []);
 
     return (
         <div className="flex h-screen bg-zinc-950 text-zinc-200">
