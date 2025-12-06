@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NewAgentForm from './NewAgentForm';
+import AgentTuning from './AgentTuning';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -20,6 +21,12 @@ const AdminDashboard = () => {
                     onClick={() => setActiveTab('agents')}
                 >
                     Add New Agent
+                </button>
+                <button
+                    className={activeTab === 'tuning' ? 'active' : ''}
+                    onClick={() => setActiveTab('tuning')}
+                >
+                    Agent Tuning
                 </button>
                 <button
                     className={activeTab === 'status' ? 'active' : ''}
@@ -46,6 +53,12 @@ const AdminDashboard = () => {
                 {activeTab === 'agents' && (
                     <div className="tab-content">
                         <NewAgentForm />
+                    </div>
+                )}
+
+                {activeTab === 'tuning' && (
+                    <div className="tab-content">
+                        <AgentTuning />
                     </div>
                 )}
 
