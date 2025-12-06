@@ -1,34 +1,75 @@
-
-
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import EmailGate from './components/EmailGate';
 import LandingPage from './components/LandingPage';
+import AdminDashboard from './components/AdminDashboard';
+import './App.css';
 
-
-
-const App: React.FC = () => {
-  // Check if user has submitted email
-  const [hasSubmittedEmail, setHasSubmittedEmail] = useState(false);
+function App() {
+  const [showEmailGate, setShowEmailGate] = useState(true);
 
   useEffect(() => {
-    // Check localStorage on mount
-    const submitted = localStorage.getItem('deepfish_email_submitted');
-    if (submitted === 'true') {
-      setHasSubmittedEmail(true);
+    // Check if user has already submitted email
+    const emailSubmitted = localStorage.getItem('deepfish_email_submitted');
+    if (emailSubmitted === 'true') {
+      setShowEmailGate(false);
     }
   }, []);
 
-  const handleEmailSuccess = () => {
-    setHasSubmittedEmail(true);
+  const handleEmailSubmit = () => {
+    setShowEmailGate(false);
   };
 
-  // If they haven't submitted email, show the email gate
-  if (!hasSubmittedEmail) {
-    return <EmailGate onSuccess={handleEmailSuccess} />;
-  }
+  return (
+    <Router>
+      <Routes>
+        {/* Main Landing Page Route */}
+        <Route
+          path="/"
+          element={
+            showEmailGate ? (
+              <EmailGate onEmailSubmit={handleEmailSubmit} />
+            ) : (
+              <LandingPage />
+            )
+          }
+        />
 
-  // After email submission, show the landing page
-  return <LandingPage />;
-};
+        {/* Admin Dashboard Route */}
+        <Route
+          path="/admin"
+          element={<AdminDashboard />}
+        />
+
+        {/* AI Studio Placeholder Route */}
+        <Route
+          path="/app"
+          element={
+            <div style={{
+              minHeight: '100vh',
+              background: '#000',
+              color: '#fff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              gap: '20px'
+            }}>
+              <h1 style={{ fontSize: '48px', color: '#00d4ff' }}>🚧 AI Studio Coming Soon</h1>
+              <p style={{ color: '#888' }}>The DeepFish AI Studio is under construction</p>
+              <a href="/" style={{ color: '#00d4ff', textDecoration: 'none' }}>← Back to Home</a>
+            </div>
+          }
+        />
+
+        {/* Catch all - redirect to home */}
+        <Route
+          path="*"
+          element={<Navigate to="/" replace />}
+        />
+      </Routes>
+    </Router>
+  );
+}
 
 export default App;
