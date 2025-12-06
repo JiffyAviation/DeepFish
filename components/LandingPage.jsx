@@ -102,12 +102,15 @@ const LandingPage = () => {
           </div>
 
           <div className="hero-cta">
-            <button className="cta-primary">
+            <button className="cta-primary" onClick={() => window.location.href = '/app'}>
               <span className="btn-text">Start Building</span>
               <span className="btn-arrow">→</span>
             </button>
-            <button className="cta-secondary">
+            <button className="cta-secondary" onClick={() => document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' })}>
               <span className="btn-text">Join Waitlist</span>
+            </button>
+            <button className="cta-login" onClick={() => window.location.href = '/login'}>
+              <span className="btn-text">Log In</span>
             </button>
           </div>
         </div>
