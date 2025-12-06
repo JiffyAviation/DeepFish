@@ -49,13 +49,13 @@ const LandingPage = () => {
       }, 35000);
     };
 
-    // Create initial batch
-    for (let i = 0; i < 15; i++) {
-      setTimeout(createFloatingCode, i * 800);
+    // Create initial batch (increased from 15 to 37 for 150% density)
+    for (let i = 0; i < 37; i++) {
+      setTimeout(createFloatingCode, i * 300);
     }
 
-    // Add new ones periodically
-    const interval = setInterval(createFloatingCode, 2000);
+    // Add new ones periodically (faster: 2000ms → 800ms)
+    const interval = setInterval(createFloatingCode, 800);
 
     return () => clearInterval(interval);
   }, []);
