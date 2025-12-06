@@ -82,8 +82,8 @@ const LandingPage = () => {
           </h1>
 
           <p className="hero-description">
-            Your team of 18 specialized AI agents. From concept to deployment,
-            orchestrate creativity, engineering, and strategy in one platform.
+            Your team of 18 specialized AI agents.
+            Uniquely trained and updated daily.
           </p>
 
           <div className="hero-stats">
@@ -185,7 +185,7 @@ const LandingPage = () => {
             <h3 className="feature-title">Creative Studio</h3>
             <p className="feature-description">
               Hanna creates production-grade UI/UX, game assets, and visual designs.
-              Zero-day image generation with artistic direction.
+              trained AI agent augmented image generation.
             </p>
             <div className="feature-tags">
               <span className="tag">UI/UX</span>
@@ -212,8 +212,7 @@ const LandingPage = () => {
             <div className="feature-icon">🎯</div>
             <h3 className="feature-title">Project Management</h3>
             <p className="feature-description">
-              Mei orchestrates the pipeline. Quality control, resource allocation,
-              and delivery coordination.
+              Mei is VP of Operations. Nothing happens without her approval
             </p>
             <div className="feature-tags">
               <span className="tag">Coordination</span>
@@ -227,7 +226,7 @@ const LandingPage = () => {
             <h3 className="feature-title">Growth & Marketing</h3>
             <p className="feature-description">
               Sally and Vesper handle launches, investor relations, and real-world
-              logistics with web search access.
+              logistics with agentic web search access.
             </p>
             <div className="feature-tags">
               <span className="tag">Marketing</span>
@@ -251,7 +250,8 @@ const LandingPage = () => {
             <div className="step-number">01</div>
             <h3 className="step-title">Describe Your Vision</h3>
             <p className="step-description">
-              Tell Mei what you want to build. She'll coordinate the team.
+              Tell Mei what you need, he'll coordinate the team.
+              Too slow? She can instantly create miltiples of anyone.
             </p>
           </div>
 
@@ -261,7 +261,8 @@ const LandingPage = () => {
             <div className="step-number">02</div>
             <h3 className="step-title">Agents Execute</h3>
             <p className="step-description">
-              Hanna designs, IT codes, QC tests - all in parallel.
+              Hanna designs, IT codes, QC tests - all in paralell,
+              everyone working at the same time
             </p>
           </div>
 
@@ -328,7 +329,7 @@ const LandingPage = () => {
           <div className="footer-brand">
             <span className="footer-logo">🐟 DeepFish</span>
             <p className="footer-tagline">
-              We don't move fast. We create the highest quality work in the world.
+              We create the highest quality work in the world.
             </p>
           </div>
 
@@ -347,7 +348,8 @@ const LandingPage = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; 2025 DeepFish AI Studio. Built with 18 agents.</p>
+          <p>&copy; 2025 DeepFish AI Studio.
+            Built by the best, for the best.</p>
         </div>
       </footer>
     </div>
