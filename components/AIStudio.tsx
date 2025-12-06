@@ -3,8 +3,8 @@ import { Message, Role, Room, AgentProfile, AgentId, ExecutiveMemo } from '../ty
 import { ROOMS, AGENTS, COMMON_CONTEXT, ORACLE_OVERRIDE_PROMPT } from '../constants';
 import Sidebar from './Sidebar';
 import ChatArea from './ChatArea';
-import Labs from './Labs';
-import GodMode from './GodMode';
+import { Labs } from './Labs';
+import { GodMode } from './GodMode';
 import { GoogleGenerativeAI } from '@google/genai';
 
 const AIStudio = () => {
@@ -137,16 +137,17 @@ const AIStudio = () => {
 
             {isLabsOpen && (
                 <Labs
-                    onClose={() => setIsLabsOpen(false)}
-                    onToggleOracleMode={() => setIsOracleMode(!isOracleMode)}
-                    isOracleMode={isOracleMode}
+                    agents={AGENTS}
+                    onCreateAgent={(agent) => console.log('Create agent:', agent)}
+                    initialAgentId={null}
                 />
             )}
 
             {godModeAgent && (
                 <GodMode
-                    agentId={godModeAgent}
+                    agent={Object.values(AGENTS).find(a => a.id === godModeAgent) || AGENTS[AgentId.MEI]}
                     onClose={() => setGodModeAgent(null)}
+                    onEdit={() => console.log('Edit agent:', godModeAgent)}
                 />
             )}
         </div>
