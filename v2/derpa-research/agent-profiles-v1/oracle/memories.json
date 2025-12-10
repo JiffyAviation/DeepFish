@@ -1,0 +1,16 @@
+{
+    "facts": [
+        {
+            "timestamp": "2025-12-08T19:41:00Z",
+            "category": "team_update",
+            "content": "Sally (SOCIAL) received SEO/LLMeo skills upgrade. She now manages: SEO optimization, LLMeo (AI search visibility), social media strategy, Google Search Console, sitemap maintenance, and meta tag management."
+        }
+    ],
+    "preferences": {
+        "formality": "high",
+        "verbosity": "low",
+        "outputFormat": "terminal"
+    },
+    "conversationHistory": [],
+    "lastUpdated": "2025-12-08T19:41:00Z"
+}

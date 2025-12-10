@@ -1,0 +1,52 @@
+{
+  "id": "youtube-transcript",
+  "title": "YouTube Transcript Reader",
+  "category": "data-extraction",
+  "version": "1.0.0",
+  "summary": "Extracts text transcripts from YouTube videos. Give it a YouTube URL, get back the full transcript as clean text. Perfect for learning from video content without watching.",
+  "tooltip": "📹 YouTube → Text\nConverts any YouTube video into a readable transcript. Used by bots to learn from video training materials.",
+  "description": "This capability allows bots to extract transcripts from YouTube videos. Simply provide a YouTube URL or video ID, and it returns the complete transcript as clean, readable text. The bot can then process this text to extract key insights and knowledge without needing to watch the video.",
+  "keywords": [
+    "youtube",
+    "transcript",
+    "video",
+    "captions",
+    "text",
+    "training"
+  ],
+  "usage": {
+    "example": "const transcript = await library.checkout('youtube-transcript', botId);\nconst text = await transcript('https://youtube.com/watch?v=...');",
+    "input": "YouTube URL or video ID",
+    "output": "Full transcript as clean text string",
+    "typical_use_cases": [
+      "Oracle learning from AI/ML tutorial videos",
+      "Gladyce researching engineering concepts",
+      "Hanna studying design principles",
+      "Any bot processing video training materials"
+    ]
+  },
+  "access_control": {
+    "allowed_bots": [
+      "oracle",
+      "mei",
+      "gladyce",
+      "hanna",
+      "vesper"
+    ],
+    "permission_level": "standard",
+    "reasoning": "Training material - most bots need this for learning"
+  },
+  "implementation": {
+    "file_reference": "server/utils/youtubeTranscript.mjs",
+    "dependencies": [
+      "fetch (native)"
+    ],
+    "language": "javascript"
+  },
+  "metadata": {
+    "created": "2025-12-10",
+    "last_updated": "2025-12-10",
+    "author": "DeepFish Team",
+    "status": "active"
+  }
+}

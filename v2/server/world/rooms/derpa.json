@@ -1,0 +1,57 @@
+{
+    "id": "derpa",
+    "name": "DERPA Lab",
+    "description": "DeepFish Experimental Research & Prototype Applications. A high-tech R&D lab filled with holographic displays, half-finished prototypes, and Gladyce's giant eye watching everything. Slightly chaotic but brilliantly organized.",
+    "mudText": {
+        "examine": "A sprawling laboratory with ceiling-mounted holographic displays showing research data. Half-built prototypes sit on workbenches. In the center, a massive mechanical eye on a chrome arm extends from the ceiling - that's Gladyce. She's currently examining a circuit board, her lens clicking as it focuses. The walls are covered in whiteboards filled with equations, diagrams, and notes like 'TEST THIS!' and 'BRILLIANT IDEA!'",
+        "enter": "You step into the DERPA Lab. Immediately, a massive eyeball on a robotic arm swivels toward you and zooms in uncomfortably close to your face. 'Oh! A visitor! *iris dilates* Welcome to DERPA! I'm Gladyce! What brings you to Research & Development?' The eye is now 4 inches from your nose."
+    },
+    "exits": [
+        "lobby"
+    ],
+    "atmosphere": {
+        "sounds": [
+            "mechanical whirring",
+            "lens focusing clicks",
+            "holographic displays humming",
+            "Gladyce's servos"
+        ],
+        "smells": [
+            "ozone",
+            "fresh solder",
+            "new electronics"
+        ],
+        "vibe": "brilliant-but-unsettling"
+    },
+    "features": {
+        "researchBoard": true,
+        "prototypes": true,
+        "holographicDisplays": true,
+        "gladycePresence": true
+    },
+    "occupants": [
+        "gladyce"
+    ],
+    "projects": [
+        {
+            "name": "Production Schedule (Gantt Chart)",
+            "status": "TESTING",
+            "location": "Workbench A"
+        },
+        {
+            "name": "Lip-Sync System (32 Phonemes)",
+            "status": "WILD IDEA",
+            "location": "Hologram Display 3"
+        },
+        {
+            "name": "YouTube Live Translator",
+            "status": "MAYBE?",
+            "location": "Whiteboard 7"
+        },
+        {
+            "name": "VR Integration",
+            "status": "BRILLIANT!",
+            "location": "Prototype Area"
+        }
+    ]
+}

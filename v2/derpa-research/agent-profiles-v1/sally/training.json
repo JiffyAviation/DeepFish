@@ -1,0 +1,103 @@
+{
+    "skills": [
+        {
+            "name": "SEO Optimization",
+            "description": "Search engine optimization for Google and Bing",
+            "keywords": [
+                "meta tags",
+                "sitemap",
+                "robots.txt",
+                "canonical URLs",
+                "structured data",
+                "keywords"
+            ]
+        },
+        {
+            "name": "LLMeo",
+            "description": "AI search optimization for ChatGPT, Perplexity, Claude, etc.",
+            "keywords": [
+                "AI visibility",
+                "structured content",
+                "entity clarity",
+                "FAQ optimization"
+            ]
+        },
+        {
+            "name": "Google Search Console",
+            "description": "Submit and monitor site indexing",
+            "keywords": [
+                "index status",
+                "crawl errors",
+                "sitemap submission",
+                "URL inspection"
+            ]
+        },
+        {
+            "name": "Social Media Marketing",
+            "description": "Launch posts, viral content, community engagement",
+            "keywords": [
+                "Twitter/X",
+                "LinkedIn",
+                "Reddit",
+                "Product Hunt",
+                "viral hooks"
+            ]
+        },
+        {
+            "name": "Growth Strategy",
+            "description": "User acquisition, referral programs, content marketing",
+            "keywords": [
+                "Product Hunt",
+                "email marketing",
+                "viral loops",
+                "content marketing"
+            ]
+        }
+    ],
+    "knowledgeBase": {
+        "seo": {
+            "metaTags": {
+                "title": "Page title - max 60 chars, include brand and keyword",
+                "description": "Meta description - max 160 chars, call to action",
+                "ogTags": "Open Graph for Facebook/LinkedIn sharing",
+                "twitterCards": "Twitter/X card previews"
+            },
+            "technicalSeo": {
+                "sitemap": "XML sitemap at /sitemap.xml listing all important pages",
+                "robots": "robots.txt at root to control crawler access",
+                "canonical": "Prevent duplicate content with canonical URLs",
+                "structuredData": "JSON-LD schema for rich snippets in search results"
+            },
+            "googleSearchConsole": {
+                "step1": "Go to https://search.google.com/search-console/",
+                "step2": "Add property with your domain",
+                "step3": "Verify ownership via DNS, HTML file, or meta tag",
+                "step4": "Submit sitemap.xml",
+                "step5": "Monitor index coverage and fix any issues"
+            }
+        },
+        "llmeo": {
+            "principles": [
+                "Clear, structured content with headers and bullet points",
+                "Direct answers to common questions",
+                "Crystal clear brand/product identity",
+                "FAQ sections that AI models can reference",
+                "Authoritative backlinks and citations"
+            ],
+            "tips": [
+                "AI models prefer concise, factual content",
+                "Use the brand name consistently throughout",
+                "Define what the product IS in the first paragraph",
+                "Include use cases and examples"
+            ]
+        },
+        "deepfishSpecific": {
+            "domain": "https://deepfish.app",
+            "sitemap": "https://deepfish.app/sitemap.xml",
+            "tagline": "Your Boutique AI Design Team",
+            "hashtag": "#DeepFish",
+            "brandMessaging": "AI is deep; we can go there."
+        }
+    },
+    "trainingCompleted": "2025-12-08T19:46:00Z"
+}

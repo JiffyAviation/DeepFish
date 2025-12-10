@@ -1,0 +1,25 @@
+{
+    "id": "accounting",
+    "name": "Accounting Office",
+    "description": "Julie's domain. Walls covered in marathon medals and financial charts. The smell of protein shakes and spreadsheets fills the air. A treadmill desk sits in the corner.",
+    "mudText": {
+        "examine": "A modern office with dual monitors showing real-time financial dashboards. Marathon bibs from Boston, NYC, and Chicago are framed on the wall. A blender sits next to the coffee maker (unused). Julie's running shoes are under the desk, ready for her lunch run.",
+        "enter": "You enter the Accounting Office. Julie is at her standing desk, sipping a green smoothie while reviewing Stripe transactions. Her fitness tracker beeps. 'Just hit 10K steps!' she says without looking up."
+    },
+    "exits": [
+        "lobby",
+        "exec"
+    ],
+    "atmosphere": {
+        "sounds": [
+            "keyboard clicking",
+            "blender whirring",
+            "fitness tracker beeping"
+        ],
+        "smells": [
+            "protein powder",
+            "fresh spreadsheets"
+        ],
+        "vibe": "energetic-efficient"
+    }
+}

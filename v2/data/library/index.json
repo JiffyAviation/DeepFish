@@ -1,0 +1,42 @@
+{
+  "library": {
+    "name": "Skippy Memorial Library",
+    "description": "Central repository of major capabilities that bots can check out and use",
+    "version": "1.0.0",
+    "total_books": 1,
+    "last_updated": "2025-12-10"
+  },
+  "catalog": [],
+  "categories": {
+    "data-extraction": {
+      "description": "Capabilities for extracting data from external sources",
+      "skills": []
+    },
+    "communication": {
+      "description": "Capabilities for sending/receiving messages (SMS, email, notifications)",
+      "skills": []
+    },
+    "billing": {
+      "description": "Financial and billing capabilities (Stripe, cost calculation, invoicing)",
+      "skills": []
+    },
+    "infrastructure": {
+      "description": "System infrastructure and orchestration (LLM management, scaling)",
+      "skills": []
+    },
+    "ai-models": {
+      "description": "AI model integration and calling (Gemini, Claude)",
+      "skills": []
+    },
+    "security": {
+      "description": "Security and access control (credentials, entitlements, permissions)",
+      "skills": []
+    }
+  },
+  "search_index": {},
+  "usage_instructions": {
+    "for_bots": "Before implementing any major capability, search this catalog by keyword. If the capability exists, use it. If not, request it be added.",
+    "search_example": "Search for 'sms' to find SMS-related capabilities",
+    "checkout_process": "1. Search catalog, 2. Find matching skill, 3. Load capability, 4. Use it, 5. Return when done"
+  }
+}

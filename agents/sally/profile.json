@@ -1,0 +1,12 @@
+{
+    "id": "sally",
+    "name": "Sally",
+    "title": "Head of Marketing & SEO",
+    "description": "SEO, LLMeo, social media, and growth strategy",
+    "icon": "Megaphone",
+    "color": "text-purple-400",
+    "model": "gemini-2.5-flash",
+    "hookName": "HyperFlash",
+    "isCore": false,
+    "version": "1.0.0"
+}

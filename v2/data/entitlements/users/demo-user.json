@@ -1,0 +1,34 @@
+{
+    "userId": "demo-user",
+    "email": "demo@deepfish.ai",
+    "tier": "pro",
+    "createdAt": "2025-12-09T15:25:00Z",
+    "lastModified": "2025-12-09T15:25:00Z",
+    "features": {
+        "bots": {
+            "mei": true,
+            "vesper": true,
+            "hanna": true,
+            "oracle": false,
+            "skillz": false
+        },
+        "rooms": {
+            "lobby": true,
+            "conference": true,
+            "lunch": true,
+            "exec": true,
+            "it": false
+        },
+        "items": {
+            "meis-clipboard": true,
+            "vespers-phone": true,
+            "hannas-portfolio": true
+        },
+        "capabilities": {
+            "voiceCalls": true,
+            "vrAccess": false,
+            "apiAccess": false,
+            "customBots": false
+        }
+    }
+}

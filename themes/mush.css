@@ -1,0 +1,336 @@
+/* Field Hospital Theme Styles */
+/* Inspired by 1970s military field hospital aesthetic */
+
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&family=Caveat:wght@700&display=swap');
+
+/* Root variables for Field Hospital theme */
+:root[data-theme="field-hospital"] {
+    /* Military Color Palette */
+    --olive-drab: #6B7C3C;
+    --khaki: #C3B091;
+    --army-green: #4B5320;
+    --canvas: #E8DCC4;
+    --medical-red: #8B0000;
+    --sign-yellow: #DAA520;
+    --rust-brown: #8B4513;
+
+    /* Backgrounds */
+    --bg-tent: #D4C5A9;
+    --bg-mud: #5C4033;
+    --bg-paper: #F5F5DC;
+
+    /* Text */
+    --text-typewriter: #2C2416;
+    --text-faded: #6B6B6B;
+    --text-stamp: #8B0000;
+
+    /* Fonts */
+    --font-typewriter: 'Courier Prime', 'Courier New', monospace;
+    --font-display: 'Special Elite', 'Courier New', monospace;
+    --font-handwritten: 'Caveat', cursive;
+}
+
+/* Field Hospital theme body */
+body[data-theme="field-hospital"] {
+    background: var(--bg-tent);
+    color: var(--text-typewriter);
+    font-family: var(--font-typewriter);
+    background-image:
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.03) 2px,
+            rgba(0, 0, 0, 0.03) 4px);
+    filter: sepia(10%) contrast(95%);
+}
+
+/* Typewriter Header */
+.field-hospital-header {
+    background: var(--olive-drab);
+    border: 3px solid var(--army-green);
+    padding: 16px 24px;
+    color: var(--bg-paper);
+    font-family: var(--font-display);
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.field-hospital-header::before {
+    content: '***';
+    margin-right: 12px;
+}
+
+.field-hospital-header::after {
+    content: '***';
+    margin-left: 12px;
+}
+
+/* Canvas Sidebar */
+.field-hospital-sidebar {
+    background: var(--canvas);
+    border-right: 4px solid var(--rust-brown);
+    box-shadow: inset -5px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Typewriter Buttons */
+.field-hospital-button {
+    background: var(--khaki);
+    color: var(--text-typewriter);
+    border: 2px solid var(--army-green);
+    padding: 10px 20px;
+    font-family: var(--font-typewriter);
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.1s;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.field-hospital-button:hover {
+    background: var(--sign-yellow);
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.field-hospital-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+/* Paper Panel */
+.field-hospital-panel {
+    background: var(--bg-paper);
+    border: 2px solid var(--text-faded);
+    padding: 20px;
+    margin: 16px 0;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.field-hospital-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 24px,
+            rgba(0, 0, 0, 0.05) 24px,
+            rgba(0, 0, 0, 0.05) 25px);
+    pointer-events: none;
+}
+
+/* Status Bar (like a telegram) */
+.field-hospital-status-bar {
+    background: var(--sign-yellow);
+    border: 3px double var(--army-green);
+    padding: 8px 24px;
+    color: var(--text-typewriter);
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 2px;
+}
+
+/* Agent Status (like dog tags) */
+.field-hospital-agent-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background: var(--khaki);
+    border: 2px solid var(--army-green);
+    font-family: var(--font-typewriter);
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.field-hospital-agent-status.operational {
+    border-color: var(--army-green);
+    color: var(--army-green);
+}
+
+.field-hospital-agent-status.processing {
+    border-color: var(--sign-yellow);
+    color: var(--rust-brown);
+    animation: typewriter-blink 0.8s step-end infinite;
+}
+
+.field-hospital-agent-status.offline {
+    border-color: var(--medical-red);
+    color: var(--medical-red);
+}
+
+/* Message Bubbles (like memos) */
+.field-hospital-message {
+    background: var(--bg-paper);
+    border-left: 4px solid var(--olive-drab);
+    padding: 16px;
+    margin: 12px 0;
+    font-family: var(--font-typewriter);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.field-hospital-message::before {
+    content: '>';
+    position: absolute;
+    left: 8px;
+    color: var(--text-faded);
+}
+
+.field-hospital-message.user {
+    border-left: none;
+    border-right: 4px solid var(--medical-red);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.field-hospital-message.user::before {
+    content: '<';
+    left: auto;
+    right: 8px;
+}
+
+/* Military Date Display */
+.field-hospital-date {
+    font-family: var(--font-typewriter);
+    color: var(--text-faded);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Input Field (typewriter style) */
+.field-hospital-input {
+    background: var(--bg-paper);
+    border: 2px solid var(--army-green);
+    padding: 12px 16px;
+    color: var(--text-typewriter);
+    font-family: var(--font-typewriter);
+    font-size: 14px;
+    outline: none;
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.field-hospital-input:focus {
+    border-color: var(--olive-drab);
+    background: #FFFFFF;
+}
+
+/* Divider (like a telegram separator) */
+.field-hospital-divider {
+    height: 2px;
+    background: repeating-linear-gradient(90deg,
+            var(--army-green) 0px,
+            var(--army-green) 10px,
+            transparent 10px,
+            transparent 20px);
+    margin: 20px 0;
+}
+
+/* Typewriter blink animation */
+@keyframes typewriter-blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0.3;
+    }
+}
+
+/* Alert (like urgent telegram) */
+.field-hospital-alert {
+    background: var(--medical-red);
+    color: var(--bg-paper);
+    border: 3px double #FFFFFF;
+    padding: 16px 24px;
+    font-family: var(--font-display);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    animation: urgent-flash 1.5s ease-in-out infinite;
+}
+
+@keyframes urgent-flash {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Rank Badge (like shoulder patches) */
+.field-hospital-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--olive-drab);
+    color: var(--bg-paper);
+    border: 1px solid var(--army-green);
+    font-family: var(--font-typewriter);
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.field-hospital-badge.command {
+    background: var(--olive-drab);
+}
+
+.field-hospital-badge.medical {
+    background: var(--medical-red);
+}
+
+.field-hospital-badge.logistics {
+    background: var(--rust-brown);
+}
+
+.field-hospital-badge.recreation {
+    background: var(--sign-yellow);
+    color: var(--text-typewriter);
+}
+
+/* Stamp effect (for completed tasks) */
+.field-hospital-stamp {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 3px solid var(--text-stamp);
+    color: var(--text-stamp);
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transform: rotate(-5deg);
+    opacity: 0.7;
+    letter-spacing: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .field-hospital-header {
+        padding: 12px 16px;
+        font-size: 16px;
+    }
+}

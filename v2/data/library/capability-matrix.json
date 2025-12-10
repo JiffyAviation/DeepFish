@@ -1,0 +1,113 @@
+{
+    "matrix_version": "1.0.0",
+    "description": "Capability matrix showing which bots have access to which library skills. 1 = access granted, 0 = access denied.",
+    "last_updated": "2025-12-10",
+    "bots": [
+        "oracle",
+        "mei",
+        "julie",
+        "gladyce",
+        "hanna",
+        "vesper"
+    ],
+    "skills": [
+        "youtube-transcript",
+        "llm-assignment",
+        "training-distribution",
+        "llm-orchestration",
+        "task-coordination",
+        "stripe-integration",
+        "financial-tracking",
+        "engineering-calc",
+        "cad-generation",
+        "notification-system",
+        "sms-sender",
+        "email-sender"
+    ],
+    "access_matrix": {
+        "oracle": {
+            "youtube-transcript": 1,
+            "llm-assignment": 1,
+            "training-distribution": 1,
+            "llm-orchestration": 0,
+            "task-coordination": 0,
+            "stripe-integration": 0,
+            "financial-tracking": 0,
+            "engineering-calc": 0,
+            "cad-generation": 0,
+            "notification-system": 1,
+            "sms-sender": 0,
+            "email-sender": 1
+        },
+        "mei": {
+            "youtube-transcript": 1,
+            "llm-assignment": 0,
+            "training-distribution": 0,
+            "llm-orchestration": 1,
+            "task-coordination": 1,
+            "stripe-integration": 0,
+            "financial-tracking": 0,
+            "engineering-calc": 0,
+            "cad-generation": 0,
+            "notification-system": 1,
+            "sms-sender": 1,
+            "email-sender": 1
+        },
+        "julie": {
+            "youtube-transcript": 0,
+            "llm-assignment": 0,
+            "training-distribution": 0,
+            "llm-orchestration": 0,
+            "task-coordination": 0,
+            "stripe-integration": 1,
+            "financial-tracking": 1,
+            "engineering-calc": 0,
+            "cad-generation": 0,
+            "notification-system": 1,
+            "sms-sender": 0,
+            "email-sender": 1
+        },
+        "gladyce": {
+            "youtube-transcript": 1,
+            "llm-assignment": 0,
+            "training-distribution": 0,
+            "llm-orchestration": 0,
+            "task-coordination": 0,
+            "stripe-integration": 0,
+            "financial-tracking": 0,
+            "engineering-calc": 1,
+            "cad-generation": 1,
+            "notification-system": 0,
+            "sms-sender": 0,
+            "email-sender": 0
+        },
+        "hanna": {
+            "youtube-transcript": 1,
+            "llm-assignment": 0,
+            "training-distribution": 0,
+            "llm-orchestration": 0,
+            "task-coordination": 0,
+            "stripe-integration": 0,
+            "financial-tracking": 0,
+            "engineering-calc": 0,
+            "cad-generation": 1,
+            "notification-system": 0,
+            "sms-sender": 0,
+            "email-sender": 0
+        },
+        "vesper": {
+            "youtube-transcript": 1,
+            "llm-assignment": 0,
+            "training-distribution": 0,
+            "llm-orchestration": 0,
+            "task-coordination": 0,
+            "stripe-integration": 0,
+            "financial-tracking": 0,
+            "engineering-calc": 0,
+            "cad-generation": 0,
+            "notification-system": 1,
+            "sms-sender": 1,
+            "email-sender": 1
+        }
+    }
+}

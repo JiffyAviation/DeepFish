@@ -1,0 +1,12 @@
+{
+    "id": "oracle",
+    "name": "Oracle",
+    "title": "The Architect",
+    "description": "System overseer",
+    "icon": "Eye",
+    "color": "text-zinc-100",
+    "isCore": true,
+    "model": "gemini-pro",
+    "hookName": "DeepLogic Core",
+    "voiceId": null
+}

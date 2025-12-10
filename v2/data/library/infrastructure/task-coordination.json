@@ -1,0 +1,50 @@
+{
+    "id": "task-coordination",
+    "title": "Parallel Task Coordination",
+    "category": "infrastructure",
+    "version": "1.0.0",
+    "summary": "Mei's system for dividing user requests into parallel tasks and assigning them to specialist bots. Tracks progress, manages dependencies, and coordinates all work across the team.",
+    "tooltip": "🎯 Task Division\nMei's system for breaking down requests into parallel tasks. Assigns work to bots, tracks progress, coordinates the team.",
+    "description": "Mei's core capability for intelligent task division and coordination. This system analyzes user requests, identifies required expertise, divides work into parallel tasks, assigns tasks to appropriate specialist bots, tracks progress across all tasks, manages dependencies, and coordinates the entire team. It's what makes Mei the ultimate tasker.",
+    "keywords": [
+        "mei",
+        "tasks",
+        "coordination",
+        "parallel",
+        "assignment",
+        "project-management"
+    ],
+    "usage": {
+        "example": "const coordinator = await library.checkout('task-coordination', 'mei');\nconst tasks = await coordinator.divideRequest(userRequest);\nawait coordinator.assignTasks(tasks);",
+        "input": "User request, bot capabilities, current workload",
+        "output": "Task breakdown, bot assignments, progress tracking",
+        "typical_use_cases": [
+            "Mei dividing 'build rocket engine' into architecture/thrust/CAD tasks",
+            "Mei assigning Oracle to architecture, Gladyce to thrust, Hanna to CAD",
+            "Mei tracking progress across all parallel tasks",
+            "Mei coordinating dependencies between tasks",
+            "Mei reporting overall project status"
+        ]
+    },
+    "access_control": {
+        "allowed_bots": [
+            "mei"
+        ],
+        "permission_level": "restricted",
+        "reasoning": "Project coordination - only PM should divide and assign tasks"
+    },
+    "implementation": {
+        "file_reference": "server/orchestration/taskCoordinator.ts",
+        "dependencies": [
+            "Project memory",
+            "Bot registry"
+        ],
+        "language": "typescript"
+    },
+    "metadata": {
+        "created": "2025-12-10",
+        "last_updated": "2025-12-10",
+        "author": "DeepFish Team",
+        "status": "active"
+    }
+}

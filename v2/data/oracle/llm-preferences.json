@@ -1,0 +1,70 @@
+{
+    "system": {
+        "name": "Oracle's LLM Assignments",
+        "description": "Oracle researches and assigns optimal LLMs to each bot. Bots check this file to know which models to use.",
+        "last_updated": "2025-12-10T10:41:00Z",
+        "updated_by": "oracle"
+    },
+    "bot_assignments": {
+        "oracle": {
+            "primary": "gemini-2.0-flash-exp",
+            "fallback_1": "gemini-1.5-pro",
+            "fallback_2": "gemini-1.5-flash",
+            "reasoning": "Needs deep reasoning for architecture decisions. Flash-exp for speed with quality."
+        },
+        "mei": {
+            "primary": "gemini-2.0-flash-exp",
+            "fallback_1": "gemini-1.5-pro",
+            "fallback_2": "gemini-1.5-flash",
+            "reasoning": "Needs fast orchestration and task division. Flash-exp optimal for parallel coordination."
+        },
+        "gladyce": {
+            "primary": "gemini-2.0-flash-exp",
+            "fallback_1": "gemini-1.5-pro",
+            "fallback_2": "gemini-1.5-flash",
+            "reasoning": "Engineering calculations need accuracy. Flash-exp for technical work."
+        },
+        "hanna": {
+            "primary": "gemini-2.0-flash-exp",
+            "fallback_1": "gemini-1.5-pro",
+            "fallback_2": "gemini-1.5-flash",
+            "reasoning": "Design work needs creative reasoning. Flash-exp for visual thinking."
+        },
+        "julie": {
+            "primary": "gemini-1.5-flash",
+            "fallback_1": "gemini-1.5-pro",
+            "fallback_2": "gemini-2.0-flash-exp",
+            "reasoning": "Financial calculations are straightforward. Flash for cost efficiency."
+        },
+        "vesper": {
+            "primary": "gemini-2.0-flash-exp",
+            "fallback_1": "gemini-1.5-pro",
+            "fallback_2": "gemini-1.5-flash",
+            "reasoning": "User experience needs empathy and creativity. Flash-exp for nuanced responses."
+        }
+    },
+    "task_specific_overrides": {
+        "complex_architecture": {
+            "model": "gemini-1.5-pro",
+            "reasoning": "Use Pro for extremely complex system design"
+        },
+        "simple_queries": {
+            "model": "gemini-1.5-flash",
+            "reasoning": "Use Flash for cost efficiency on simple tasks"
+        },
+        "creative_design": {
+            "model": "gemini-2.0-flash-exp",
+            "reasoning": "Use Flash-exp for creative and visual tasks"
+        }
+    },
+    "research_notes": {
+        "last_leaderboard_check": "2025-12-10T03:00:00Z",
+        "findings": [
+            "Gemini 2.0 Flash Exp shows excellent performance on reasoning tasks",
+            "Cost-effective for most bot operations",
+            "Pro reserved for complex architecture decisions",
+            "Flash for simple financial calculations"
+        ],
+        "next_review": "2025-12-11T03:00:00Z"
+    }
+}

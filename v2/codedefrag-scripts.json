@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "codedefrag": "pwsh scripts/codedefrag.ps1",
+        "codedefrag:execute": "pwsh scripts/codedefrag.ps1 -Execute",
+        "codedefrag:verbose": "pwsh scripts/codedefrag.ps1 -Execute -Verbose"
+    }
+}

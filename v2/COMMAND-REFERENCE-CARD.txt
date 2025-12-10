@@ -1,0 +1,58 @@
+╔══════════════════════════════════════════════════════════════╗
+║              🏢 DEEPFISH COMMAND REFERENCE 🏢                ║
+║                    Wallet Card Edition                       ║
+╚══════════════════════════════════════════════════════════════╝
+
+📍 NAVIGATION
+  look, l              Look around current room
+  go <room>            Move to another room
+  rooms                List all available rooms
+
+💬 COMMUNICATION
+  say <message>        Say something in current room
+  talk <bot> <msg>     Talk to a specific bot
+  who                  Show who's online
+
+🔑 YOUR API KEYS
+  credentials add <provider> <key>    Add API key
+  credentials list                    List your keys
+  credentials test <provider>         Test connection
+  credentials remove <provider>       Remove key
+
+🎓 TRAINING BOTS
+  train <bot>                  Train bot (multi-line)
+  train <bot> url <url>        Add URL to training
+  train <bot> file <path>      Add file to training
+  train queue                  View training queue
+
+🤖 CUSTOM BOTS
+  bot create <name>            Create your own bot
+  bot list                     List your bots
+  bot edit <name>              View/edit bot
+
+📖 HELP & EXIT
+  help                 Show all commands
+  quit, exit           Leave DeepFish
+
+╔══════════════════════════════════════════════════════════════╗
+║                      QUICK TIPS                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+✓ No commas in bot names: "talk mei hello" not "talk mei, hello"
+✓ Bot names are lowercase: "mei" not "Mei"
+✓ Use "who" to see all available bots
+✓ Use "rooms" to see where you can go
+
+╔══════════════════════════════════════════════════════════════╗
+║                    MEET THE TEAM                             ║
+╚══════════════════════════════════════════════════════════════╝
+
+🧙 Oracle      System Architect (proven patterns only)
+📋 Mei         Project Manager (always has clipboard)
+🌟 Vesper      Concierge (knows everyone)
+💼 Julie       CFO (accounting & finance)
+👁️ Gladyce     R&D Director (romance novel enthusiast)
+
+╔══════════════════════════════════════════════════════════════╝
+║  DeepFish v2 • Built on 40+ years of MUD/MUSH architecture  ║
+╚══════════════════════════════════════════════════════════════╝

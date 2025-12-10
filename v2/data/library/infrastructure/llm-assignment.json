@@ -1,0 +1,50 @@
+{
+    "id": "llm-assignment",
+    "title": "LLM Assignment System",
+    "category": "infrastructure",
+    "version": "1.0.0",
+    "summary": "Oracle's system for researching and assigning optimal LLM models to each bot. Scrapes leaderboards, analyzes benchmarks, updates preferences file that all bots read.",
+    "tooltip": "🔮 LLM Research\nOracle's system for assigning the best AI models to each bot. Researches benchmarks, updates preferences, ensures optimal performance.",
+    "description": "Oracle's research and assignment system for LLM optimization. This capability scrapes LLM leaderboards, analyzes benchmark results, determines optimal models for each bot's specialization, updates the LLM preferences file, and conducts overnight research to stay current with the latest models. All bots read Oracle's preferences to know which models to use.",
+    "keywords": [
+        "oracle",
+        "llm",
+        "assignment",
+        "research",
+        "benchmarks",
+        "optimization"
+    ],
+    "usage": {
+        "example": "const assigner = await library.checkout('llm-assignment', 'oracle');\nawait assigner.updateBotLLM('gladyce', {\n  primary: 'gemini-2.0-flash-exp',\n  reasoning: 'Optimal for engineering tasks'\n});",
+        "input": "Bot specializations, benchmark data, cost constraints",
+        "output": "LLM assignments, reasoning, preferences file updates",
+        "typical_use_cases": [
+            "Oracle conducting overnight research at 3am",
+            "Oracle scraping LLM leaderboards",
+            "Oracle analyzing which models excel at engineering vs design",
+            "Oracle updating llm-preferences.json",
+            "Oracle assigning Gemini 2.0 Flash Exp to most bots"
+        ]
+    },
+    "access_control": {
+        "allowed_bots": [
+            "oracle"
+        ],
+        "permission_level": "restricted",
+        "reasoning": "Research and tool assignment - only Oracle has this authority"
+    },
+    "implementation": {
+        "file_reference": "server/oracle/trainingSystem.ts",
+        "dependencies": [
+            "LLM preferences file",
+            "Benchmark APIs"
+        ],
+        "language": "typescript"
+    },
+    "metadata": {
+        "created": "2025-12-10",
+        "last_updated": "2025-12-10",
+        "author": "DeepFish Team",
+        "status": "active"
+    }
+}

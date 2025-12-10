@@ -1,0 +1,163 @@
+{
+    "process": {
+        "name": "CodeDefrag",
+        "version": "1.0.0",
+        "description": "3-pass codebase cleanup process to identify and remove duplicates, orphans, redundancies, and fragmentation",
+        "created": "2025-12-10",
+        "author": "DeepFish Team"
+    },
+    "methodology": {
+        "passes": 3,
+        "approach": "Progressive depth analysis",
+        "targets": [
+            "duplicates",
+            "orphans",
+            "redundancies",
+            "fragmentation"
+        ]
+    },
+    "passes_definition": {
+        "pass_1": {
+            "name": "Surface-Level Scan",
+            "focus": "Obvious duplicates and orphaned files",
+            "depth": "shallow",
+            "targets": [
+                "Duplicate files (same name, different extensions)",
+                "Orphaned test files",
+                "Old/deprecated files",
+                "Temporary files left in root"
+            ]
+        },
+        "pass_2": {
+            "name": "Deep Structure Analysis",
+            "focus": "Redundant implementations and unused systems",
+            "depth": "medium",
+            "targets": [
+                "Multiple implementations of same functionality",
+                "Unused/abandoned subsystems",
+                "Redundant utilities",
+                "Duplicate managers/orchestrators"
+            ]
+        },
+        "pass_3": {
+            "name": "Fragmentation & Architecture",
+            "focus": "Code organization and unused dependencies",
+            "depth": "deep",
+            "targets": [
+                "Scattered utilities (verify usage)",
+                "Disorganized documentation",
+                "Unused imports",
+                "Dead code paths"
+            ]
+        }
+    },
+    "execution_steps": [
+        {
+            "step": 1,
+            "action": "Scan codebase",
+            "command": "find_by_name with various patterns",
+            "output": "List of all files by type"
+        },
+        {
+            "step": 2,
+            "action": "Analyze findings",
+            "command": "Manual review + grep for imports",
+            "output": "Categorized list (duplicates, orphans, unused)"
+        },
+        {
+            "step": 3,
+            "action": "Create cleanup report",
+            "command": "Document findings with confidence levels",
+            "output": "cleanup_analysis.md"
+        },
+        {
+            "step": 4,
+            "action": "Execute cleanup",
+            "command": "Remove-Item commands for safe deletions",
+            "output": "Cleaner codebase"
+        },
+        {
+            "step": 5,
+            "action": "Verify results",
+            "command": "Re-scan to confirm deletions",
+            "output": "Cleanup summary"
+        }
+    ],
+    "safety_rules": {
+        "always_backup": "Ensure git commit before cleanup",
+        "verify_imports": "Grep for imports before deleting utilities",
+        "confidence_threshold": "Only delete files with HIGH confidence",
+        "error_handling": "Use -ErrorAction SilentlyContinue",
+        "documentation": "Document all deletions in cleanup report"
+    },
+    "categories": {
+        "duplicates": {
+            "definition": "Multiple files implementing same functionality",
+            "examples": [
+                "youtubeTranscript.ts + youtubeTranscript.mjs",
+                "router-minimal.ts + messageRouter.ts",
+                "orchestrator.ts + meiOrchestrator.ts"
+            ],
+            "action": "Keep ONE (most recent/complete), delete others"
+        },
+        "orphans": {
+            "definition": "Files with no references or purpose",
+            "examples": [
+                "test-*.js/mjs files in root",
+                "Old constitution files after merge",
+                "Temporary test scripts"
+            ],
+            "action": "Delete immediately"
+        },
+        "redundancies": {
+            "definition": "Multiple implementations of same concept",
+            "examples": [
+                "3 bot managers",
+                "3 routers",
+                "2 queue implementations"
+            ],
+            "action": "Consolidate to ONE implementation"
+        },
+        "fragmentation": {
+            "definition": "Scattered or disorganized code/docs",
+            "examples": [
+                "20+ utilities in one directory",
+                "12 markdown files in root",
+                "Unused imports"
+            ],
+            "action": "Organize into logical structure"
+        }
+    },
+    "results_tracking": {
+        "metrics": [
+            "files_deleted",
+            "files_moved",
+            "directories_created",
+            "size_reduction_percent",
+            "build_time_improvement"
+        ],
+        "expected_improvements": {
+            "file_count_reduction": "25-30%",
+            "clarity": "Significant",
+            "build_speed": "5-10% faster",
+            "maintenance": "Easier navigation"
+        }
+    },
+    "when_to_run": {
+        "frequency": "As needed",
+        "triggers": [
+            "After major feature development",
+            "Before major refactoring",
+            "When build times increase",
+            "When codebase feels cluttered",
+            "Before production deployment"
+        ],
+        "recommended": "Every 2-3 weeks during active development"
+    },
+    "automation_potential": {
+        "pass_1": "High - Can automate duplicate detection",
+        "pass_2": "Medium - Requires import analysis",
+        "pass_3": "Low - Requires human judgment",
+        "future": "Create CLI command: npm run codedefrag"
+    }
+}

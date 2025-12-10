@@ -1,0 +1,51 @@
+{
+    "id": "llm-orchestration",
+    "title": "LLM Instance Orchestration",
+    "category": "infrastructure",
+    "version": "1.0.0",
+    "summary": "Mei's SS TIER system for managing LLM instances. Spins up/down instances based on load, load balances across multiple models, monitors costs in real-time, and auto-scales during peak hours.",
+    "tooltip": "🎯 LLM Scaling (SS TIER)\nMei's system for managing multiple LLM instances. Auto-scales based on demand, optimizes costs, load balances requests.",
+    "description": "Mei's ultimate orchestration system for managing LLM instances at scale. This capability handles spinning up and shutting down LLM instances based on current load, load balancing requests across multiple instances, monitoring API costs in real-time, predicting capacity needs, and auto-scaling during peak hours. It's Mei's SS TIER responsibility.",
+    "keywords": [
+        "llm",
+        "orchestration",
+        "scaling",
+        "mei",
+        "load-balancing",
+        "auto-scale"
+    ],
+    "usage": {
+        "example": "const orchestrator = await library.checkout('llm-orchestration', 'mei');\nawait orchestrator.scaleUp(3); // Spin up 3 more instances",
+        "input": "Current load metrics, cost thresholds, scaling policies",
+        "output": "Instance status, cost reports, capacity predictions",
+        "typical_use_cases": [
+            "Mei scaling up during high traffic",
+            "Mei shutting down idle instances to save costs",
+            "Mei load balancing requests across instances",
+            "Mei predicting capacity needs",
+            "Mei reporting resource usage to Julie"
+        ]
+    },
+    "access_control": {
+        "allowed_bots": [
+            "mei"
+        ],
+        "permission_level": "restricted",
+        "reasoning": "Infrastructure management - only PM should orchestrate resources"
+    },
+    "implementation": {
+        "file_reference": "server/orchestration/meiOrchestrator.ts",
+        "dependencies": [
+            "LLM APIs",
+            "Cost tracking"
+        ],
+        "language": "typescript"
+    },
+    "metadata": {
+        "created": "2025-12-10",
+        "last_updated": "2025-12-10",
+        "author": "DeepFish Team",
+        "status": "active",
+        "tier": "SS"
+    }
+}

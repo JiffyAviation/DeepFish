@@ -1,0 +1,266 @@
+/* Agent Tuning - Manual Training Interface */
+
+.agent-tuning-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.tuning-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.tuning-header h2 {
+    font-size: 32px;
+    color: #00d4ff;
+    margin-bottom: 8px;
+}
+
+.tuning-header p {
+    color: #888;
+    font-size: 14px;
+}
+
+.success-banner {
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 16px;
+    border-radius: 8px;
+    color: #00ff88;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+/* Agent Selector */
+.agent-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.agent-option {
+    background: rgba(26, 26, 26, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.agent-option:hover {
+    border-color: rgba(0, 212, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.agent-option.selected {
+    border-color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.agent-option-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.agent-option-role {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Form Sections */
+.form-section {
+    background: rgba(26, 26, 26, 0.6);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.form-section h3 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #00d4ff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.form-textarea {
+    resize: vertical;
+}
+
+/* Priority Selector */
+.priority-selector {
+    display: flex;
+    gap: 12px;
+}
+
+.priority-btn {
+    flex: 1;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.priority-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.priority-btn.selected {
+    border-color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+}
+
+/* Info Box */
+.tuning-info {
+    background: rgba(255, 184, 108, 0.05);
+    border: 1px solid rgba(255, 184, 108, 0.2);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.tuning-info p {
+    color: #ffb86c;
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(0, 212, 255, 0.6);
+}
+
+/* Recent Uploads */
+.recent-uploads {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.recent-uploads h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.uploads-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.upload-item {
+    background: rgba(26, 26, 26, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.upload-agent {
+    font-weight: 600;
+    color: #00d4ff;
+    min-width: 100px;
+}
+
+.upload-desc {
+    flex: 1;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.upload-time {
+    color: #666;
+    font-size: 12px;
+    min-width: 100px;
+}
+
+.upload-status {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.upload-status.processing {
+    background: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .agent-selector {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .priority-selector {
+        flex-direction: column;
+    }
+
+    .upload-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

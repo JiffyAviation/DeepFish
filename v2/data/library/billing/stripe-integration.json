@@ -1,0 +1,49 @@
+{
+    "id": "stripe-integration",
+    "title": "Stripe Payment Processing",
+    "category": "billing",
+    "version": "1.0.0",
+    "summary": "Handles all payment processing through Stripe. Create subscriptions, process one-time payments, manage customer billing. Julie's primary financial tool.",
+    "tooltip": "💳 Stripe Payments\nProcesses credit cards, subscriptions, and invoices through Stripe API. Handles all money transactions securely.",
+    "description": "Complete Stripe integration for payment processing. This capability handles subscription creation, one-time payments, customer management, invoice generation, and payment status tracking. It's Julie's primary tool for managing all financial transactions in DeepFish.",
+    "keywords": [
+        "stripe",
+        "payment",
+        "billing",
+        "subscription",
+        "invoice",
+        "credit-card"
+    ],
+    "usage": {
+        "example": "const stripe = await library.checkout('stripe-integration', 'julie');\nawait stripe.createSubscription(userId, planId);",
+        "input": "Customer info, payment details, subscription plans",
+        "output": "Payment confirmation, subscription status, invoice data",
+        "typical_use_cases": [
+            "Julie processing new subscriptions",
+            "Julie handling one-time purchases",
+            "Julie generating invoices",
+            "Julie tracking payment status"
+        ]
+    },
+    "access_control": {
+        "allowed_bots": [
+            "julie"
+        ],
+        "permission_level": "restricted",
+        "reasoning": "Financial operations - only CFO should handle payments"
+    },
+    "implementation": {
+        "file_reference": "server/routes/purchase.ts",
+        "dependencies": [
+            "stripe npm package",
+            "Stripe API key"
+        ],
+        "language": "typescript"
+    },
+    "metadata": {
+        "created": "2025-12-10",
+        "last_updated": "2025-12-10",
+        "author": "DeepFish Team",
+        "status": "active"
+    }
+}

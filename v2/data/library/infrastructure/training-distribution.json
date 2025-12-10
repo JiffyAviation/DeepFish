@@ -1,0 +1,50 @@
+{
+    "id": "training-distribution",
+    "title": "Training Material Distribution",
+    "category": "infrastructure",
+    "version": "1.0.0",
+    "summary": "Oracle's system for pushing training materials to bot inboxes. Oracle finds valuable content (videos, PDFs, articles) and distributes them to specific bots for learning.",
+    "tooltip": "🔮 Training Distribution\nOracle's system for providing training materials to bots. Pushes videos, PDFs, and articles to bot inboxes for learning.",
+    "description": "Oracle's training distribution system. This capability allows Oracle to add training materials (YouTube videos, PDFs, URLs, text) to individual bot inboxes. Bots check their inbox on boot, process the materials, extract knowledge, and delete the originals (inbox protocol). Oracle decides which bots need which training based on their specializations.",
+    "keywords": [
+        "oracle",
+        "training",
+        "distribution",
+        "inbox",
+        "learning",
+        "materials"
+    ],
+    "usage": {
+        "example": "const trainer = await library.checkout('training-distribution', 'oracle');\nawait trainer.addTrainingMaterial('gladyce', {\n  type: 'youtube',\n  source: 'https://...',\n  topic: 'Advanced rocket propulsion'\n});",
+        "input": "Bot ID, material type, source URL/file, topic",
+        "output": "Material added to bot's inbox",
+        "typical_use_cases": [
+            "Oracle finding great engineering video for Gladyce",
+            "Oracle providing design principles PDF to Hanna",
+            "Oracle distributing AI research to all bots",
+            "Oracle pushing specialized training to specific bots",
+            "Bots processing inbox materials on boot"
+        ]
+    },
+    "access_control": {
+        "allowed_bots": [
+            "oracle"
+        ],
+        "permission_level": "restricted",
+        "reasoning": "Training provision - only Oracle provides training materials"
+    },
+    "implementation": {
+        "file_reference": "server/oracle/trainingSystem.ts",
+        "dependencies": [
+            "Training inbox directories",
+            "Bot specializations"
+        ],
+        "language": "typescript"
+    },
+    "metadata": {
+        "created": "2025-12-10",
+        "last_updated": "2025-12-10",
+        "author": "DeepFish Team",
+        "status": "active"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "id": "hanna",
+    "name": "Hanna",
+    "title": "Senior Art Director",
+    "description": "Creative director and visual designer",
+    "icon": "Palette",
+    "color": "text-pink-400",
+    "isCore": true,
+    "model": "gemini-pro",
+    "hookName": "Creative Vision",
+    "voiceId": null
+}
