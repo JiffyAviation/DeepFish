@@ -110,7 +110,7 @@ export class TwoWayVoiceConversation {
         // Route to bot with full conversation context
         const message = ChannelAdapters.fromVoice(caller, speechInput, '');
         message.to = botId;
-        message.metadata = { conversationHistory: history };
+        message.metadata = { ...message.metadata, conversationHistory: history } as any;
 
         const response = await unifiedRouter.routeMessage(message);
 

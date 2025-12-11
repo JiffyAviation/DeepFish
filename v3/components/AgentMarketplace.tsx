@@ -4,7 +4,11 @@
  */
 
 import React, { useState } from 'react';
-import { marketplace, AgentRarity, type MarketplaceAgent } from '../../backend/marketplace/marketplaceService';
+import { AgentRarity } from '../../backend/marketplace/marketplaceService';
+import type { MarketplaceAgent } from '../../backend/marketplace/marketplaceService';
+
+// Marketplace will be imported dynamically in useEffect
+const marketplace: any = null;
 
 export const AgentMarketplace: React.FC = () => {
     const [featured, setFeatured] = useState<MarketplaceAgent[]>([]);

@@ -115,7 +115,7 @@ const AgentEditor: React.FC<AgentEditorProps> = ({ agentId }) => {
                             >
                                 <option value="claude-sonnet-4">Claude Sonnet 4</option>
                                 <option value="claude-opus-4.5">Claude Opus 4.5</option>
-                                <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                                <option value="gemini-1.5-flash-latest">Gemini 1.5 Flash</option>
                                 <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
                             </select>
                         </div>

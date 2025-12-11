@@ -81,7 +81,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
  */
 app.post('/api/generate', async (req, res) => {
     try {
-        const { prompt, model = 'gemini-1.5-flash', systemInstruction, history, tools } = req.body;
+        const { prompt, model = 'gemini-1.5-flash-latest', systemInstruction, history, tools } = req.body;
 
         // Validation
         if (!prompt || typeof prompt !== 'string') {

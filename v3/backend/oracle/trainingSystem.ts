@@ -49,7 +49,7 @@ export class OracleTrainingSystem {
             return {
                 primary: 'gemini-2.0-flash-exp',
                 fallback_1: 'gemini-1.5-pro',
-                fallback_2: 'gemini-1.5-flash',
+                fallback_2: 'gemini-1.5-flash-latest',
                 reasoning: 'Default assignment'
             };
         }
