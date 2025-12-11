@@ -1,0 +1,284 @@
+/* Starfleet LCARS Theme Styles */
+/* Inspired by Star Trek: The Next Generation */
+
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&display=swap');
+
+/* Root variables for Starfleet theme */
+:root[data-theme="starfleet"] {
+    /* LCARS Color Palette */
+    --lcars-orange: #FF9966;
+    --lcars-blue: #9999FF;
+    --lcars-purple: #CC99CC;
+    --lcars-red: #CC6666;
+    --lcars-peach: #FFCC99;
+    --lcars-green: #99CC99;
+
+    /* Backgrounds */
+    --bg-primary: #000000;
+    --bg-secondary: #1A1A1A;
+    --bg-tertiary: #333333;
+
+    /* Text */
+    --text-primary: #FF9966;
+    --text-secondary: #9999FF;
+    --text-muted: #666666;
+
+    /* Borders */
+    --border-radius-sm: 20px;
+    --border-radius-md: 30px;
+    --border-radius-lg: 40px;
+
+    /* Fonts */
+    --font-primary: 'Antonio', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'Courier New', monospace;
+}
+
+/* Starfleet theme body */
+body[data-theme="starfleet"] {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+}
+
+/* LCARS Header */
+.starfleet-header {
+    background: linear-gradient(90deg, var(--lcars-orange) 0%, var(--lcars-peach) 100%);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    padding: 20px 40px;
+    color: #000000;
+    font-weight: bold;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* LCARS Sidebar */
+.starfleet-sidebar {
+    background: var(--bg-secondary);
+    border-right: 4px solid var(--lcars-orange);
+    border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
+}
+
+/* LCARS Buttons */
+.starfleet-button {
+    background: var(--lcars-orange);
+    color: #000000;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 12px 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-primary);
+    letter-spacing: 1px;
+}
+
+.starfleet-button:hover {
+    background: var(--lcars-peach);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 153, 102, 0.5);
+}
+
+.starfleet-button:active {
+    transform: scale(0.98);
+}
+
+/* LCARS Panel */
+.starfleet-panel {
+    background: var(--bg-secondary);
+    border: 2px solid var(--lcars-orange);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    margin: 16px 0;
+}
+
+/* LCARS Status Bar */
+.starfleet-status-bar {
+    background: linear-gradient(90deg, var(--lcars-blue) 0%, var(--lcars-purple) 100%);
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+    padding: 10px 40px;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Agent Status Indicator */
+.starfleet-agent-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px;
+    background: rgba(255, 153, 102, 0.2);
+    border: 1px solid var(--lcars-orange);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.starfleet-agent-status.operational {
+    border-color: var(--lcars-green);
+    color: var(--lcars-green);
+}
+
+.starfleet-agent-status.processing {
+    border-color: var(--lcars-peach);
+    color: var(--lcars-peach);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.starfleet-agent-status.offline {
+    border-color: var(--lcars-red);
+    color: var(--lcars-red);
+}
+
+/* LCARS Corner Elements (decorative) */
+.lcars-corner {
+    position: relative;
+}
+
+.lcars-corner::before {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 0 0 40px 0;
+    background: var(--lcars-orange);
+}
+
+/* Message Bubbles (Starfleet style) */
+.starfleet-message {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--lcars-orange);
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+    padding: 16px;
+    margin: 12px 0;
+}
+
+.starfleet-message.user {
+    border-left: none;
+    border-right: 4px solid var(--lcars-blue);
+    border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+}
+
+/* Stardate Display */
+.starfleet-stardate {
+    font-family: var(--font-mono);
+    color: var(--lcars-peach);
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* LCARS Input Field */
+.starfleet-input {
+    background: var(--bg-tertiary);
+    border: 2px solid var(--lcars-orange);
+    border-radius: var(--border-radius-sm);
+    padding: 12px 20px;
+    color: var(--text-primary);
+    font-family: var(--font-primary);
+    font-size: 16px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.starfleet-input:focus {
+    border-color: var(--lcars-peach);
+    box-shadow: 0 0 20px rgba(255, 153, 102, 0.3);
+}
+
+/* LCARS Divider */
+.starfleet-divider {
+    height: 4px;
+    background: linear-gradient(90deg,
+            var(--lcars-orange) 0%,
+            var(--lcars-peach) 25%,
+            var(--lcars-blue) 50%,
+            var(--lcars-purple) 75%,
+            var(--lcars-orange) 100%);
+    border-radius: 2px;
+    margin: 20px 0;
+}
+
+/* Pulse animation for processing state */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* LCARS Alert */
+.starfleet-alert {
+    background: var(--lcars-red);
+    color: #000000;
+    border-radius: var(--border-radius-sm);
+    padding: 16px 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: alertBlink 1s ease-in-out infinite;
+}
+
+@keyframes alertBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* LCARS Badge (for agent ranks) */
+.starfleet-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--lcars-orange);
+    color: #000000;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.starfleet-badge.command {
+    background: var(--lcars-orange);
+}
+
+.starfleet-badge.operations {
+    background: var(--lcars-peach);
+}
+
+.starfleet-badge.sciences {
+    background: var(--lcars-blue);
+}
+
+.starfleet-badge.medical {
+    background: var(--lcars-purple);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .starfleet-header {
+        padding: 16px 20px;
+        font-size: 18px;
+    }
+
+    .starfleet-status-bar {
+        padding: 8px 20px;
+        font-size: 12px;
+    }
+}

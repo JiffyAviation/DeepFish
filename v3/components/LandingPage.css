@@ -1,0 +1,771 @@
+/* DeepFish Landing Page - Glassmorphic Matrix Aesthetic */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.landing-page {
+  min-height: 100vh;
+  background: #000000;
+  color: #e0e0e0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Floating Code Background */
+.code-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-code {
+  position: absolute;
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 12px;
+  white-space: nowrap;
+  animation: floatHorizontal 30s linear infinite;
+}
+
+@keyframes floatHorizontal {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+/* Scan Lines Overlay */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+      transparent 50%,
+      rgba(0, 212, 255, 0.02) 50%);
+  background-size: 100% 4px;
+  opacity: 0.3;
+}
+
+/* Glass Card Base */
+.glass-card {
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  gap: 60px;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 20px;
+  font-size: 13px;
+  color: #00d4ff;
+  margin-bottom: 30px;
+}
+
+.badge-icon {
+  font-size: 16px;
+}
+
+.hero-title {
+  margin-bottom: 24px;
+}
+
+.title-gradient {
+  display: block;
+  font-size: 72px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00d4ff 0%, #ff00ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.title-subtitle {
+  display: block;
+  font-size: 24px;
+  font-weight: 400;
+  color: #888;
+  font-family: 'Fira Code', monospace;
+}
+
+.hero-description {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #b0b0b0;
+  margin-bottom: 40px;
+  max-width: 540px;
+}
+
+/* Hero Stats */
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-number {
+  font-size: 40px;
+  font-weight: 700;
+  color: #00d4ff;
+  font-family: 'Fira Code', monospace;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* CTA Buttons */
+.hero-cta {
+  display: flex;
+  gap: 16px;
+}
+
+.cta-primary,
+.cta-secondary {
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cta-primary {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+  border: none;
+  color: #000;
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+}
+
+.cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(0, 212, 255, 0.6);
+}
+
+.cta-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  backdrop-filter: blur(10px);
+}
+
+.cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.cta-login {
+  background: transparent;
+  border: 1px solid #00d4ff;
+  color: #00d4ff;
+}
+
+.cta-login:hover {
+  background: rgba(0, 212, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.cta-primary:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Hero Visual */
+.hero-visual {
+  flex: 1;
+  max-width: 600px;
+}
+
+.terminal-preview {
+  padding: 0;
+  overflow: hidden;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot.red {
+  background: #ff5f56;
+}
+
+.dot.yellow {
+  background: #ffbd2e;
+}
+
+.dot.green {
+  background: #27c93f;
+}
+
+.terminal-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  color: #666;
+}
+
+.terminal-body {
+  padding: 24px;
+  font-family: 'Fira Code', monospace;
+  font-size: 14px;
+}
+
+.terminal-line {
+  margin-bottom: 16px;
+}
+
+.prompt {
+  color: #00ff88;
+  margin-right: 8px;
+}
+
+.command {
+  color: #00d4ff;
+}
+
+.terminal-output {
+  margin-top: 16px;
+}
+
+.output-line {
+  padding: 8px 0;
+  color: #888;
+}
+
+.check {
+  color: #00ff88;
+  margin-right: 8px;
+}
+
+.typing {
+  animation: blink 1.5s infinite;
+}
+
+.cursor {
+  color: #00d4ff;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-arrow {
+  font-size: 32px;
+  color: #00d4ff;
+  animation: bounce 2s infinite;
+}
+
+.scroll-text {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-10px);
+  }
+
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+
+/* Features Section */
+.features-section {
+  position: relative;
+  z-index: 2;
+  padding: 120px 5%;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.highlight {
+  color: #00d4ff;
+}
+
+.section-description {
+  font-size: 18px;
+  color: #888;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  padding: 32px;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.feature-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.feature-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.feature-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.feature-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 4px 12px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  font-size: 12px;
+  color: #00d4ff;
+}
+
+/* How It Works */
+.how-it-works-section {
+  position: relative;
+  z-index: 2;
+  padding: 80px 5%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.workflow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.workflow-step {
+  flex: 1;
+  min-width: 240px;
+  padding: 32px;
+  text-align: center;
+}
+
+.step-number {
+  font-size: 48px;
+  font-weight: 700;
+  color: rgba(0, 212, 255, 0.3);
+  font-family: 'Fira Code', monospace;
+  margin-bottom: 16px;
+}
+
+.step-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.step-description {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.6;
+}
+
+.workflow-arrow {
+  font-size: 32px;
+  color: rgba(0, 212, 255, 0.3);
+}
+
+/* Pricing Section */
+.pricing-section {
+  position: relative;
+  z-index: 2;
+  padding: 80px 5%;
+}
+
+.pricing-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 48px;
+  text-align: center;
+}
+
+.pricing-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.pricing-description {
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 32px;
+}
+
+.pricing-amount {
+  margin-bottom: 24px;
+}
+
+.currency {
+  font-size: 32px;
+  color: #00d4ff;
+  vertical-align: super;
+}
+
+.price {
+  font-size: 72px;
+  font-weight: 700;
+  color: #00d4ff;
+  font-family: 'Fira Code', monospace;
+}
+
+.pricing-note {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+.pricing-cta {
+  width: 100%;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #ff00ff 0%, #ff006e 100%);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(255, 0, 255, 0.4);
+}
+
+.pricing-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(255, 0, 255, 0.6);
+}
+
+/* Waitlist Section */
+.waitlist-section {
+  position: relative;
+  z-index: 2;
+  padding: 80px 5%;
+}
+
+.waitlist-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 48px;
+  text-align: center;
+}
+
+.waitlist-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.waitlist-description {
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 32px;
+}
+
+.waitlist-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.waitlist-input {
+  flex: 1;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.waitlist-input:focus {
+  outline: none;
+  border-color: #00d4ff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.waitlist-submit {
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.waitlist-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+}
+
+.waitlist-note {
+  font-size: 13px;
+  color: #666;
+}
+
+/* Footer */
+.footer {
+  position: relative;
+  z-index: 2;
+  padding: 60px 5% 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #00d4ff;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.footer-tagline {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  max-width: 300px;
+}
+
+.footer-links,
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a,
+.footer-social a {
+  color: #888;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover,
+.footer-social a:hover {
+  color: #00d4ff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: #666;
+  font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 80px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-cta {
+    justify-content: center;
+  }
+
+  .title-gradient {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title-gradient {
+    font-size: 42px;
+  }
+
+  .title-subtitle {
+    font-size: 18px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+
+  .waitlist-form {
+    flex-direction: column;
+  }
+
+  .workflow-arrow {
+    display: none;
+  }
+}

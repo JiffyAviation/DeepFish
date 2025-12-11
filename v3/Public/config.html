@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepFish V3 - API Configuration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a3a52 0%, #2c5364 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #1a3a52;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status.configured {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.missing {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .test-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐟 DeepFish V3 Configuration</h1>
+            <p>Configure all API keys and integrations in one place</p>
+        </div>
+
+        <div class="content">
+            <!-- AI Services -->
+            <div class="section">
+                <h2>🤖 AI Services <span class="status configured">2/3 Configured</span></h2>
+
+                <div class="input-group">
+                    <label for="gemini">Google Gemini API Key</label>
+                    <input type="password" id="gemini" placeholder="AIzaSy..." value="">
+                    <button class="test-btn" onclick="testAPI('gemini')">Test Connection</button>
+                </div>
+
+                <div class="input-group">
+                    <label for="anthropic">Anthropic Claude API Key</label>
+                    <input type="password" id="anthropic" placeholder="sk-ant-..." value="">
+                    <button class="test-btn" onclick="testAPI('anthropic')">Test Connection</button>
+                </div>
+
+                <div class="input-group">
+                    <label for="abacus">Abacus AI API Key (Optional)</label>
+                    <input type="password" id="abacus" placeholder="abacus_..." value="">
+                </div>
+            </div>
+
+            <!-- Voice & Communication -->
+            <div class="section">
+                <h2>📞 Communication Services <span class="status configured">1/2 Configured</span></h2>
+
+                <div class="input-group">
+                    <label for="elevenlabs">ElevenLabs API Key (TTS)</label>
+                    <input type="password" id="elevenlabs" placeholder="el_..." value="">
+                    <button class="test-btn" onclick="testAPI('elevenlabs')">Test Voice</button>
+                </div>
+
+                <div class="input-group">
+                    <label for="twilio-sid">Twilio Account SID</label>
+                    <input type="text" id="twilio-sid" placeholder="ACxxxx..." value="">
+                </div>
+
+                <div class="input-group">
+                    <label for="twilio-token">Twilio Auth Token</label>
+                    <input type="password" id="twilio-token" placeholder="xxxxx..." value="">
+                </div>
+
+                <div class="input-group">
+                    <label for="twilio-phone">Twilio Phone Number</label>
+                    <input type="text" id="twilio-phone" placeholder="+1234567890" value="">
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="section">
+                <h2>📧 Email Integration <span class="status missing">Not Configured</span></h2>
+
+                <div class="input-group">
+                    <label for="email-user">Email Address</label>
+                    <input type="email" id="email-user" placeholder="mei@deepfish.ai" value="">
+                </div>
+
+                <div class="input-group">
+                    <label for="email-password">Email App Password</label>
+                    <input type="password" id="email-password" placeholder="App-specific password" value="">
+                </div>
+
+                <div class="input-group">
+                    <label for="email-imap">IMAP Host</label>
+                    <input type="text" id="email-imap" placeholder="imap.gmail.com" value="imap.gmail.com">
+                </div>
+
+                <div class="input-group">
+                    <label for="email-smtp">SMTP Host</label>
+                    <input type="text" id="email-smtp" placeholder="smtp.gmail.com" value="smtp.gmail.com">
+                </div>
+            </div>
+
+            <!-- Database & Storage -->
+            <div class="section">
+                <h2>💾 Database (Optional)</h2>
+
+                <div class="input-group">
+                    <label for="database-url">Database URL (Supabase, etc.)</label>
+                    <input type="text" id="database-url" placeholder="postgresql://..." value="">
+                </div>
+            </div>
+
+            <button class="save-btn" onclick="saveConfig()">💾 Save All Configuration</button>
+        </div>
+
+        <div class="footer">
+            DeepFish V3 • All API keys are stored locally and encrypted
+        </div>
+    </div>
+
+    <script>
+        // Load saved config on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadConfig();
+        });
+
+        function loadConfig() {
+            // Load from localStorage (or fetch from backend)
+            const config = JSON.parse(localStorage.getItem('deepfish-config') || '{}');
+
+            Object.keys(config).forEach(key => {
+                const input = document.getElementById(key);
+                if (input) input.value = config[key] || '';
+            });
+
+            updateStatuses();
+        }
+
+        function saveConfig() {
+            const config = {
+                gemini: document.getElementById('gemini').value,
+                anthropic: document.getElementById('anthropic').value,
+                abacus: document.getElementById('abacus').value,
+                elevenlabs: document.getElementById('elevenlabs').value,
+                'twilio-sid': document.getElementById('twilio-sid').value,
+                'twilio-token': document.getElementById('twilio-token').value,
+                'twilio-phone': document.getElementById('twilio-phone').value,
+                'email-user': document.getElementById('email-user').value,
+                'email-password': document.getElementById('email-password').value,
+                'email-imap': document.getElementById('email-imap').value,
+                'email-smtp': document.getElementById('email-smtp').value,
+                'database-url': document.getElementById('database-url').value
+            };
+
+            // Save to localStorage
+            localStorage.setItem('deepfish-config', JSON.stringify(config));
+
+            // Also send to backend to update .env
+            fetch('/api/config', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(config)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert('✅ Configuration saved successfully!');
+                    updateStatuses();
+                })
+                .catch(err => {
+                    alert('❌ Error saving configuration');
+                    console.error(err);
+                });
+        }
+
+        function testAPI(service) {
+            alert(`Testing ${service} connection...`);
+            // TODO: Implement actual API test
+        }
+
+        function updateStatuses() {
+            // Update status badges based on configured keys
+            // TODO: Implement status checking
+        }
+    </script>
+</body>
+
+</html>

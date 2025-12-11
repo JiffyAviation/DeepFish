@@ -1,0 +1,7 @@
+# Sitemap
+
+User-agent: *
+Allow: /
+
+# Important pages
+Sitemap: https://deepfish.app/sitemap.xml

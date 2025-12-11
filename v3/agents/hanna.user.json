@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "created": "2024-12-01T10:30:00Z",
+  "updated": "2024-12-03T15:45:00Z",
+  "customPrompts": [
+    "User prefers dark mode UI designs",
+    "User's target audience is enterprise B2B customers",
+    "User likes minimalist, clean interfaces with lots of whitespace"
+  ],
+  "learnedFacts": [
+    "Learned from PDF: User's brand colors are navy blue (#1a3a52) and coral (#ff6b6b)",
+    "Learned from URL: User's company style guide emphasizes accessibility (WCAG AA)",
+    "Learned from text: Previous projects show preference for geometric sans-serif fonts",
+    "Learned from conversation: User dislikes gradients and prefers flat design"
+  ],
+  "userPreferences": {
+    "designStyle": "minimalist",
+    "colorPalette": ["#1a3a52", "#ff6b6b", "#f0f0f0"],
+    "typography": "geometric-sans",
+    "targetPlatform": "web-desktop",
+    "industry": "fintech"
+  },
+  "conversationMemory": [
+    {
+      "timestamp": "2024-12-01T14:20:00Z",
+      "summary": "Discussed redesign of dashboard landing page",
+      "keyTopics": ["dashboard", "data-visualization", "responsive-design"],
+      "userFeedback": "positive"
+    },
+    {
+      "timestamp": "2024-12-02T09:15:00Z",
+      "summary": "Created icon set for mobile app",
+      "keyTopics": ["icons", "mobile-ui", "SVG"],
+      "userFeedback": "positive"
+    },
+    {
+      "timestamp": "2024-12-03T11:30:00Z",
+      "summary": "Reviewed color accessibility issues",
+      "keyTopics": ["accessibility", "WCAG", "contrast-ratios"],
+      "userFeedback": "neutral"
+    }
+  ],
+  "projectContext": [
+    {
+      "projectName": "FinanceHub Dashboard",
+      "domain": "fintech",
+      "technicalStack": ["React", "TypeScript", "TailwindCSS"],
+      "preferences": [
+        "Real-time data visualization",
+        "Mobile-first responsive design",
+        "Dark mode support"
+      ],
+      "constraints": [
+        "Must meet WCAG AA standards",
+        "Max bundle size: 500KB",
+        "Support IE11 (legacy requirement)"
+      ]
+    }
+  ]
+}
