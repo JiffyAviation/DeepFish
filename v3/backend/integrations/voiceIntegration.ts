@@ -19,21 +19,44 @@ export class VoiceIntegration {
     }
 
     /**
-     * Handle incoming call - Vesper answers conversationally
+     * Handle incoming call - Vesper answers with personality
+     * (flirty, warm, but bored receptionist)
      */
     handleIncomingCall(): string {
         const twiml = new twilio.twiml.VoiceResponse();
 
-        // Vesper's friendly greeting
+        // Vesper's personality-driven greetings (flirty, warm, bored)
+        const greetings = [
+            'DeepFish... Vesper speaking. *sigh* How can I brighten your day?',
+            'Mmm, DeepFish studios. This is Vesper... who are you looking for, honey?',
+            'DeepFish. Vesper here... another exciting day. What can I do for you?',
+            '*yawn* Oh! DeepFish. I\'m Vesper. Sorry, long morning... who did you need?',
+            'DeepFish, Vesper at your service... *chuckles* who\'s the lucky person you\'re calling for?',
+            'Vesper speaking... DeepFish studios. Make my day interesting - who do you need?',
+            'DeepFish... it\'s Vesper. *playfully* So who gets the pleasure of your call today?'
+        ];
+
+        // Random voice variations for Vesper (different female voices)
+        const vesperVoices = [
+            'Polly.Joanna',    // Professional American female
+            'Polly.Kendra',    // Warm American female
+            'Polly.Kimberly',  // Friendly American female
+            'Polly.Salli',     // Clear American female
+        ];
+
+        const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+        const randomVoice = vesperVoices[Math.floor(Math.random() * vesperVoices.length)];
+
+        // Vesper's varied greeting
         twiml.say({
-            voice: 'Polly.Joanna'  // Vesper's warm, professional voice
-        }, 'DeepFish. I\'m Vesper, how may I help you today?');
+            voice: randomVoice as any // Type cast to avoid Twilio typing issues
+        }, randomGreeting);
 
         // Gather natural conversation
         const gather = twiml.gather({
             input: ['speech'],
             timeout: 5,
-            action: '/api/voice/conversation',
+            action: `/api/voice/conversation?voice=${randomVoice}`,
             method: 'POST',
             speechTimeout: 'auto',
             language: 'en-US'
@@ -45,7 +68,7 @@ export class VoiceIntegration {
     /**
      * Handle conversational flow - Vesper chats until bot name mentioned
      */
-    handleConversation(speechResult: string, conversationTurn: number = 0): string {
+    handleConversation(speechResult: string, conversationTurn: number = 0, voice: string = 'Polly.Joanna'): string {
         const twiml = new twilio.twiml.VoiceResponse();
         const lower = speechResult.toLowerCase();
 
@@ -53,15 +76,15 @@ export class VoiceIntegration {
         const botMentioned = this.detectBotMention(lower);
 
         if (botMentioned) {
-            // Route to that bot
+            // Route to that bot - Vesper says goodbye
             twiml.say({
-                voice: 'Polly.Joanna'
+                voice: voice
             }, `Okay great, have a great day!`);
 
             twiml.pause({ length: 1 });
 
             twiml.say({
-                voice: 'Polly.Joanna'
+                voice: voice
             }, `Please leave your message for ${botMentioned} after the beep.`);
 
             twiml.record({
@@ -75,14 +98,14 @@ export class VoiceIntegration {
             const vesperResponse = this.getVesperResponse(lower, conversationTurn);
 
             twiml.say({
-                voice: 'Polly.Joanna'
+                voice: voice  // Use same voice throughout call
             }, vesperResponse);
 
             // Gather next response
             const gather = twiml.gather({
                 input: ['speech'],
                 timeout: 5,
-                action: `/api/voice/conversation?turn=${conversationTurn + 1}`,
+                action: `/api/voice/conversation?turn=${conversationTurn + 1}&voice=${voice}`,
                 method: 'POST',
                 speechTimeout: 'auto',
                 language: 'en-US'
@@ -91,7 +114,7 @@ export class VoiceIntegration {
             // After 3 turns, gently ask who they need
             if (conversationTurn >= 2) {
                 twiml.say({
-                    voice: 'Polly.Joanna'
+                    voice: voice
                 }, 'By the way, is there someone specific on our team you\'d like to speak with?');
             }
         }
