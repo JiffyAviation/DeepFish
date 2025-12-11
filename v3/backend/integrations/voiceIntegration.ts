@@ -1,6 +1,6 @@
 /**
  * Voice Call Integration for DeepFish V3
- * Vesper answers as operator, routes to specialists
+ * Vesper answers as operator, has light conversation, then routes
  */
 
 import twilio from 'twilio';
@@ -19,78 +19,139 @@ export class VoiceIntegration {
     }
 
     /**
-     * Handle incoming call - Vesper answers as operator
+     * Handle incoming call - Vesper answers conversationally
      */
     handleIncomingCall(): string {
         const twiml = new twilio.twiml.VoiceResponse();
 
-        // Vesper's operator greeting
+        // Vesper's friendly greeting
         twiml.say({
-            voice: 'Polly.Joanna'  // Vesper's professional voice
-        }, 'DeepFish. I\'m Vesper, may I ask whom you are calling for?');
+            voice: 'Polly.Joanna'  // Vesper's warm, professional voice
+        }, 'DeepFish. I\'m Vesper, how may I help you today?');
 
-        // Gather response (who they want to talk to)
+        // Gather natural conversation
         const gather = twiml.gather({
             input: ['speech'],
             timeout: 5,
-            action: '/api/voice/route',
+            action: '/api/voice/conversation',
             method: 'POST',
-            speechTimeout: 'auto'
-        });
-
-        // If no response, offer voicemail
-        twiml.say({
-            voice: 'Polly.Joanna'
-        }, 'I didn\'t catch that. Please leave a message after the beep.');
-
-        twiml.record({
-            transcribe: true,
-            transcribeCallback: '/api/voice/transcription',
-            maxLength: 60,
-            playBeep: true
+            speechTimeout: 'auto',
+            language: 'en-US'
         });
 
         return twiml.toString();
     }
 
     /**
-     * Route call based on bot name mentioned
+     * Handle conversational flow - Vesper chats until bot name mentioned
      */
-    routeToBot(speechResult: string): string {
+    handleConversation(speechResult: string, conversationTurn: number = 0): string {
         const twiml = new twilio.twiml.VoiceResponse();
         const lower = speechResult.toLowerCase();
 
-        // Detect bot name
-        let targetBot = 'mei'; // default
-        if (lower.includes('hanna')) targetBot = 'hanna';
-        else if (lower.includes('skillz') || lower.includes('skills')) targetBot = 'skillz';
-        else if (lower.includes('igor')) targetBot = 'igor';
-        else if (lower.includes('oracle')) targetBot = 'oracle';
-        else if (lower.includes('julie')) targetBot = 'julie';
-        else if (lower.includes('mei')) targetBot = 'mei';
-        else if (lower.includes('vesper')) targetBot = 'vesper';
+        // Check if they mentioned a bot name
+        const botMentioned = this.detectBotMention(lower);
 
-        // Vesper's transfer message
-        twiml.say({
-            voice: 'Polly.Joanna'
-        }, `Okay great, have a great day!`);
+        if (botMentioned) {
+            // Route to that bot
+            twiml.say({
+                voice: 'Polly.Joanna'
+            }, `Okay great, have a great day!`);
 
-        twiml.pause({ length: 1 });
+            twiml.pause({ length: 1 });
 
-        // Ask caller to leave message for the bot
-        twiml.say({
-            voice: 'Polly.Joanna'
-        }, `Please leave your message for ${targetBot} after the beep.`);
+            twiml.say({
+                voice: 'Polly.Joanna'
+            }, `Please leave your message for ${botMentioned} after the beep.`);
 
-        // Record message
-        twiml.record({
-            transcribe: true,
-            transcribeCallback: `/api/voice/transcription?bot=${targetBot}`,
-            maxLength: 60,
-            playBeep: true
-        });
+            twiml.record({
+                transcribe: true,
+                transcribeCallback: `/api/voice/transcription?bot=${botMentioned}`,
+                maxLength: 60,
+                playBeep: true
+            });
+        } else {
+            // Continue conversation - Vesper responds naturally
+            const vesperResponse = this.getVesperResponse(lower, conversationTurn);
+
+            twiml.say({
+                voice: 'Polly.Joanna'
+            }, vesperResponse);
+
+            // Gather next response
+            const gather = twiml.gather({
+                input: ['speech'],
+                timeout: 5,
+                action: `/api/voice/conversation?turn=${conversationTurn + 1}`,
+                method: 'POST',
+                speechTimeout: 'auto',
+                language: 'en-US'
+            });
+
+            // After 3 turns, gently ask who they need
+            if (conversationTurn >= 2) {
+                twiml.say({
+                    voice: 'Polly.Joanna'
+                }, 'By the way, is there someone specific on our team you\'d like to speak with?');
+            }
+        }
 
         return twiml.toString();
+    }
+
+    /**
+     * Detect if caller mentioned a bot name
+     */
+    private detectBotMention(text: string): string | null {
+        if (text.includes('hanna')) return 'hanna';
+        if (text.includes('skillz') || text.includes('skills')) return 'skillz';
+        if (text.includes('igor')) return 'igor';
+        if (text.includes('oracle')) return 'oracle';
+        if (text.includes('julie')) return 'julie';
+        if (text.includes('mei')) return 'mei';
+        if (text.includes('vesper')) return 'vesper';
+
+        return null;
+    }
+
+    /**
+     * Get Vesper's natural conversational responses
+     */
+    private getVesperResponse(userSaid: string, turn: number): string {
+        // Vesper responds naturally based on what was said
+        if (userSaid.includes('design') || userSaid.includes('ui') || userSaid.includes('look')) {
+            return 'Oh wonderful! Our creative director Hanna would be perfect for that. Would you like to speak with her?';
+        }
+
+        if (userSaid.includes('code') || userSaid.includes('develop') || userSaid.includes('bug')) {
+            return 'Ah, sounds like a technical matter. Skillz is our lead developer. Should I connect you?';
+        }
+
+        if (userSaid.includes('deploy') || userSaid.includes('server') || userSaid.includes('hosting')) {
+            return 'Got it! Igor handles all our DevOps. Let me transfer you to him.';
+        }
+
+        if (userSaid.includes('research') || userSaid.includes('learn') || userSaid.includes('study')) {
+            return 'Interesting! Oracle specializes in research and training. Shall I route you there?';
+        }
+
+        if (userSaid.includes('cost') || userSaid.includes('budget') || userSaid.includes('price')) {
+            return 'Ah yes, Julie from accounting can help with that. Would you like to leave a message for her?';
+        }
+
+        if (userSaid.includes('project') || userSaid.includes('manage') || userSaid.includes('status')) {
+            return 'Perfect! Mei is our project manager. She coordinates everything. Want me to connect you?';
+        }
+
+        // Generic friendly responses
+        const genericResponses = [
+            'I see! Tell me a bit more about what you need.',
+            'Absolutely! Which member of our team can help you with that?',
+            'That sounds great! Who would be the best person for this?',
+            'Got it! We have designers, developers, and project managers. Who do you think would be best?'
+        ];
+
+        return genericResponses[turn % genericResponses.length];
     }
 
     /**
@@ -99,14 +160,11 @@ export class VoiceIntegration {
     async processVoicemail(transcription: string, from: string, recordingUrl: string, botId: string = 'mei') {
         console.log(`[Voice] Voicemail for ${botId} from ${from}: ${transcription}`);
 
-        // Get bot's response
         const response = await this.callBot(botId, `
 Voicemail from: ${from}
 Message: ${transcription}
-(Prepare callback response)
 `);
 
-        // Schedule callback from that specific bot
         await this.scheduleCallback(from, response, botId);
     }
 
@@ -115,7 +173,6 @@ Message: ${transcription}
      */
     async makeCallback(to: string, message: string, botId: string = 'mei'): Promise<boolean> {
         try {
-            // Bot voice mapping
             const voices: Record<string, string> = {
                 'mei': 'Polly.Joanna',
                 'hanna': 'Polly.Joanna',
@@ -152,20 +209,13 @@ Message: ${transcription}
         }
     }
 
-    /**
-     * Schedule callback
-     */
     private async scheduleCallback(to: string, message: string, botId: string) {
         setTimeout(async () => {
             await this.makeCallback(to, message, botId);
-        }, 5000); // 5 second delay
+        }, 5000);
     }
 
-    /**
-     * Call bot to process message
-     */
     private async callBot(botId: string, message: string): Promise<string> {
-        // TODO: Integrate with EnhancedBotLoader
         const responses: Record<string, string> = {
             'mei': 'Hi, this is Mei from DeepFish. I got your message and I\'m on it!',
             'hanna': 'Hey! This is Hanna. I saw your design request and I\'m excited to work on it!',
@@ -179,9 +229,6 @@ Message: ${transcription}
         return responses[botId] || responses['mei'];
     }
 
-    /**
-     * Escape XML for TwiML
-     */
     private escapeXml(text: string): string {
         return text
             .replace(/&/g, '&amp;')
@@ -192,27 +239,22 @@ Message: ${transcription}
     }
 }
 
-/**
- * Express webhook handlers
- */
 export function createVoiceWebhooks(voiceIntegration: VoiceIntegration) {
     return {
-        // Incoming call - Vesper answers
         incoming: (req: any, res: any) => {
             const twiml = voiceIntegration.handleIncomingCall();
             res.type('text/xml');
             res.send(twiml);
         },
 
-        // Route to bot based on speech
-        route: (req: any, res: any) => {
+        conversation: (req: any, res: any) => {
             const { SpeechResult } = req.body;
-            const twiml = voiceIntegration.routeToBot(SpeechResult || '');
+            const turn = parseInt(req.query.turn || '0');
+            const twiml = voiceIntegration.handleConversation(SpeechResult || '', turn);
             res.type('text/xml');
             res.send(twiml);
         },
 
-        // Voicemail transcription received
         transcription: async (req: any, res: any) => {
             const { From, TranscriptionText, RecordingUrl } = req.body;
             const botId = req.query.bot || 'mei';
