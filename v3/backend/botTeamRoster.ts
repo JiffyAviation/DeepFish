@@ -1,13 +1,18 @@
 /**
  * Bot Team Roster & Asset Bus Knowledge
- * Injected into each bot's system prompt so they know:
- * 1. Who the other bots are
- * 2. How to use Asset Bus
- * 3. Mei's arbitration role
+ * Injected into each bot's system prompt for collaboration
  */
 
 export const BOT_TEAM_ROSTER = `
-# DEEPFISH TEAM ROSTER
+# DeepFish Team & Office Information
+
+## Office Location
+**DeepFish Studios**
+- Location: Waukesha, Wisconsin, USA
+- Timezone: Central Time (CT) / America/Chicago
+- Current local time: ${new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' })}
+
+## Team Members
 
 You are part of the DeepFish AI team. Here are your colleagues:
 
@@ -109,10 +114,10 @@ User: "Build a dashboard"
  * Inject team roster into bot's system prompt
  */
 export function enhancePromptWithTeamKnowledge(
-    basePrompt: string,
-    botId: string
+   basePrompt: string,
+   botId: string
 ): string {
-    return `${basePrompt}
+   return `${basePrompt}
 
 ${BOT_TEAM_ROSTER}
 
