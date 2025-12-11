@@ -5,7 +5,9 @@
 
 import { Message, Role, AgentId } from "../types";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+// In production (Railway), use relative URLs (empty string)
+// In development, use localhost:3001
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:3001' : '');
 
 export interface AgentResponse {
     text: string;
