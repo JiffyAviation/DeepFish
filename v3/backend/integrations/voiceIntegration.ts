@@ -1,10 +1,9 @@
 /**
  * Voice Call Integration for DeepFish V3
- * Answering machine + TTS callback using Twilio Voice
+ * Vesper answers as operator, routes to specialists
  */
 
 import twilio from 'twilio';
-import { VoiceResponse } from 'twilio/lib/twiml/VoiceResponse';
 
 interface VoiceConfig {
     accountSid: string;
@@ -20,62 +19,114 @@ export class VoiceIntegration {
     }
 
     /**
-     * Handle incoming call (answering machine)
-     * Twilio webhook: POST /api/voice/incoming
+     * Handle incoming call - Vesper answers as operator
      */
     handleIncomingCall(): string {
-        const twiml = new VoiceResponse();
+        const twiml = new twilio.twiml.VoiceResponse();
 
-        // Greeting
+        // Vesper's operator greeting
         twiml.say({
-            voice: 'Polly.Joanna' // Female voice
-        }, 'Hello! You\'ve reached DeepFish AI Studio. This is Mei, your project manager.');
+            voice: 'Polly.Joanna'  // Vesper's professional voice
+        }, 'DeepFish. I\'m Vesper, may I ask whom you are calling for?');
 
-        // Record voicemail
-        twiml.say('Please leave a message after the tone, and I\'ll call you back shortly.');
+        // Gather response (who they want to talk to)
+        const gather = twiml.gather({
+            input: ['speech'],
+            timeout: 5,
+            action: '/api/voice/route',
+            method: 'POST',
+            speechTimeout: 'auto'
+        });
+
+        // If no response, offer voicemail
+        twiml.say({
+            voice: 'Polly.Joanna'
+        }, 'I didn\'t catch that. Please leave a message after the beep.');
 
         twiml.record({
-            action: '/api/voice/recording',
             transcribe: true,
             transcribeCallback: '/api/voice/transcription',
-            maxLength: 120, // 2 minutes max
+            maxLength: 60,
             playBeep: true
         });
 
-        // Hangup
-        twiml.say('Thank you! I\'ll get back to you soon.');
-        twiml.hangUp();
+        return twiml.toString();
+    }
+
+    /**
+     * Route call based on bot name mentioned
+     */
+    routeToBot(speechResult: string): string {
+        const twiml = new twilio.twiml.VoiceResponse();
+        const lower = speechResult.toLowerCase();
+
+        // Detect bot name
+        let targetBot = 'mei'; // default
+        if (lower.includes('hanna')) targetBot = 'hanna';
+        else if (lower.includes('skillz') || lower.includes('skills')) targetBot = 'skillz';
+        else if (lower.includes('igor')) targetBot = 'igor';
+        else if (lower.includes('oracle')) targetBot = 'oracle';
+        else if (lower.includes('julie')) targetBot = 'julie';
+        else if (lower.includes('mei')) targetBot = 'mei';
+        else if (lower.includes('vesper')) targetBot = 'vesper';
+
+        // Vesper's transfer message
+        twiml.say({
+            voice: 'Polly.Joanna'
+        }, `Okay great, have a great day!`);
+
+        twiml.pause({ length: 1 });
+
+        // Ask caller to leave message for the bot
+        twiml.say({
+            voice: 'Polly.Joanna'
+        }, `Please leave your message for ${targetBot} after the beep.`);
+
+        // Record message
+        twiml.record({
+            transcribe: true,
+            transcribeCallback: `/api/voice/transcription?bot=${targetBot}`,
+            maxLength: 60,
+            playBeep: true
+        });
 
         return twiml.toString();
     }
 
     /**
      * Process voicemail transcription
-     * Twilio webhook: POST /api/voice/transcription
      */
-    async processVoicemail(transcription: string, from: string, recordingUrl: string) {
-        console.log(`[Voice] Voicemail from ${from}: ${transcription}`);
+    async processVoicemail(transcription: string, from: string, recordingUrl: string, botId: string = 'mei') {
+        console.log(`[Voice] Voicemail for ${botId} from ${from}: ${transcription}`);
 
-        // Route to Mei
-        const botId = 'mei';
+        // Get bot's response
         const response = await this.callBot(botId, `
 Voicemail from: ${from}
 Message: ${transcription}
 (Prepare callback response)
 `);
 
-        // Schedule callback
-        await this.scheduleCallback(from, response);
+        // Schedule callback from that specific bot
+        await this.scheduleCallback(from, response, botId);
     }
 
     /**
-     * Make outbound call with TTS response
+     * Make outbound call with TTS response from specific bot
      */
-    async makeCallback(to: string, message: string, botVoiceId?: string): Promise<boolean> {
+    async makeCallback(to: string, message: string, botId: string = 'mei'): Promise<boolean> {
         try {
-            // Use bot's voice from .fsh file (e.g., Mei's ElevenLabs voice)
-            // For Twilio, we'll use their TTS voices
-            const voice = botVoiceId === 'mei' ? 'Polly.Joanna' : 'Polly.Matthew';
+            // Bot voice mapping
+            const voices: Record<string, string> = {
+                'mei': 'Polly.Joanna',
+                'hanna': 'Polly.Joanna',
+                'skillz': 'Polly.Matthew',
+                'igor': 'Polly.Matthew',
+                'oracle': 'Polly.Brian',
+                'julie': 'Polly.Joanna',
+                'vesper': 'Polly.Joanna'
+            };
+
+            const voice = voices[botId] || 'Polly.Joanna';
 
             const call = await this.client.calls.create({
                 twiml: `
@@ -83,9 +134,9 @@ Message: ${transcription}
             <Say voice="${voice}">
               ${this.escapeXml(message)}
             </Say>
-            <Pause length="2"/>
+            <Pause length="1"/>
             <Say voice="${voice}">
-              If you need anything else, just call back or text me. Goodbye!
+              If you need anything else, just call back. Goodbye!
             </Say>
           </Response>
         `,
@@ -93,7 +144,7 @@ Message: ${transcription}
                 from: this.config.phoneNumber
             });
 
-            console.log(`[Voice] Callback initiated to ${to}: ${call.sid}`);
+            console.log(`[Voice] ${botId} callback to ${to}: ${call.sid}`);
             return true;
         } catch (error) {
             console.error('[Voice] Callback failed:', error);
@@ -102,51 +153,30 @@ Message: ${transcription}
     }
 
     /**
-     * Interactive voice conversation (IVR)
-     * For real-time back-and-forth
+     * Schedule callback
      */
-    handleInteractiveCall(userSpeech: string): string {
-        const twiml = new VoiceResponse();
-
-        // Gather user speech
-        const gather = twiml.gather({
-            input: ['speech'],
-            action: '/api/voice/interactive',
-            speechTimeout: 3,
-            language: 'en-US'
-        });
-
-        // Bot response (would come from LLM)
-        gather.say({
-            voice: 'Polly.Joanna'
-        }, 'I understand. Let me help you with that.');
-
-        // Continue conversation
-        twiml.say('Is there anything else?');
-
-        // Loop back for more input
-        twiml.redirect('/api/voice/interactive');
-
-        return twiml.toString();
-    }
-
-    /**
-     * Schedule callback (could be immediate or delayed)
-     */
-    private async scheduleCallback(to: string, message: string) {
-        // Immediate callback
+    private async scheduleCallback(to: string, message: string, botId: string) {
         setTimeout(async () => {
-            await this.makeCallback(to, message, 'mei');
+            await this.makeCallback(to, message, botId);
         }, 5000); // 5 second delay
     }
 
     /**
      * Call bot to process message
-     * TODO: Integrate with actual bot system
      */
     private async callBot(botId: string, message: string): Promise<string> {
-        // Placeholder - integrate with EnhancedBotLoader
-        return `Hi, this is Mei from DeepFish. I got your voicemail and I'm working on it right now. I'll send you an update via email within the hour. Thanks for calling!`;
+        // TODO: Integrate with EnhancedBotLoader
+        const responses: Record<string, string> = {
+            'mei': 'Hi, this is Mei from DeepFish. I got your message and I\'m on it!',
+            'hanna': 'Hey! This is Hanna. I saw your design request and I\'m excited to work on it!',
+            'skillz': 'Skillz here. Got your message about the code - I\'ll have something for you soon!',
+            'igor': 'Igor from DevOps. I\'ll get that deployment sorted out right away.',
+            'oracle': 'Oracle speaking. Interesting research question - I\'ll dive into it!',
+            'julie': 'Hi, Julie from accounting. I\'ll pull those numbers for you.',
+            'vesper': 'Vesper here. Thanks for calling DeepFish - I\'ll coordinate with the team!'
+        };
+
+        return responses[botId] || responses['mei'];
     }
 
     /**
@@ -167,9 +197,17 @@ Message: ${transcription}
  */
 export function createVoiceWebhooks(voiceIntegration: VoiceIntegration) {
     return {
-        // Incoming call
+        // Incoming call - Vesper answers
         incoming: (req: any, res: any) => {
             const twiml = voiceIntegration.handleIncomingCall();
+            res.type('text/xml');
+            res.send(twiml);
+        },
+
+        // Route to bot based on speech
+        route: (req: any, res: any) => {
+            const { SpeechResult } = req.body;
+            const twiml = voiceIntegration.routeToBot(SpeechResult || '');
             res.type('text/xml');
             res.send(twiml);
         },
@@ -177,16 +215,9 @@ export function createVoiceWebhooks(voiceIntegration: VoiceIntegration) {
         // Voicemail transcription received
         transcription: async (req: any, res: any) => {
             const { From, TranscriptionText, RecordingUrl } = req.body;
-            await voiceIntegration.processVoicemail(TranscriptionText, From, RecordingUrl);
+            const botId = req.query.bot || 'mei';
+            await voiceIntegration.processVoicemail(TranscriptionText, From, RecordingUrl, botId);
             res.sendStatus(200);
-        },
-
-        // Interactive conversation
-        interactive: async (req: any, res: any) => {
-            const { SpeechResult } = req.body;
-            const twiml = voiceIntegration.handleInteractiveCall(SpeechResult || '');
-            res.type('text/xml');
-            res.send(twiml);
         }
     };
 }
