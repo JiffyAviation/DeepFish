@@ -81,7 +81,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
  */
 app.post('/api/generate', async (req, res) => {
     try {
-        const { prompt, model = 'gemini-1.5-flash-latest', systemInstruction, history, tools } = req.body;
+        const { prompt, model = 'gemini-2.0-flash-exp', systemInstruction, history, tools } = req.body;
 
         // Validation
         if (!prompt || typeof prompt !== 'string') {
@@ -116,12 +116,33 @@ app.post('/api/generate', async (req, res) => {
         }
 
         const response = await result.response;
-        const text = response.text();
-        const functionCalls = response.functionCalls();
+
+        let text = '';
+        let functionCalls = [];
+
+        try {
+            if (response.candidates && response.candidates.length > 0) {
+                text = response.text();
+                // Check if functionCalls exists as a method
+                if (typeof response.functionCalls === 'function') {
+                    const calls = response.functionCalls();
+                    if (calls) functionCalls = calls;
+                }
+            } else {
+                console.log('No candidates returned (Safety check?)');
+                if (response.promptFeedback) {
+                    console.log('Prompt Feedback:', response.promptFeedback);
+                    text = `[Blocked: ${response.promptFeedback.blockReason}]`;
+                }
+            }
+        } catch (e: any) {
+            console.error('Error parsing response:', e);
+            text = "Error parsing response from AI";
+        }
 
         res.json({
             text,
-            functionCalls: functionCalls || [],
+            functionCalls,
             candidates: response.candidates
         });
 

@@ -1,0 +1,62 @@
+{
+    "id": "artifact-system",
+    "title": "Artifact System - Code & Document Extraction",
+    "category": "infrastructure",
+    "version": "1.0.0",
+    "description": "Detects and extracts deliverables (code, documents, sales materials) from LLM responses. Creates downloadable artifacts that users can copy or save.",
+    "author": "DeepFish Core Team",
+    "created": "2025-12-10",
+    "usage": {
+        "when_to_use": "Automatically used when bot generates code or documents",
+        "examples": [
+            "Bot creates React component → Artifact created automatically",
+            "Bot writes sales pitch → Artifact created automatically",
+            "Bot generates config file → Artifact created automatically"
+        ]
+    },
+    "implementation": {
+        "function_name": "detectAndCreateArtifacts",
+        "parameters": {
+            "llmResponse": {
+                "type": "string",
+                "description": "Full LLM response text",
+                "required": true
+            },
+            "botId": {
+                "type": "string",
+                "description": "ID of bot that created response",
+                "required": true
+            }
+        },
+        "returns": {
+            "type": "array",
+            "items": "Artifact objects with type, language, filename, content"
+        }
+    },
+    "artifact_types": [
+        "code - Code files (JS, TS, Python, etc.)",
+        "document - Markdown, text documents",
+        "config - JSON, YAML, env files",
+        "sales - Sales materials, pitches",
+        "design - Design specs, mockups",
+        "data - CSV, JSON data files"
+    ],
+    "code_location": "server/artifacts/",
+    "dependencies": [],
+    "access_control": {
+        "oracle": 1,
+        "mei": 1,
+        "julie": 1,
+        "vesper": 1,
+        "gladyce": 1,
+        "hanna": 1,
+        "root": 1,
+        "igor": 1
+    },
+    "user_actions": [
+        "Copy to clipboard",
+        "Download as file",
+        "View in editor"
+    ],
+    "notes": "Critical for v1.0. Without this, users can't extract deliverables from bot responses."
+}

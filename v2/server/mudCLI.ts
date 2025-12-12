@@ -124,25 +124,6 @@ export class MudCLI {
                 this.listRooms();
                 break;
 
-            case 'say':
-                if (arg) this.say(arg);
-                else console.log('Say what?');
-                break;
-
-            case 'talk':
-                if (arg) {
-                    const [botName, ...messageWords] = arg.split(' ');
-                    const message = messageWords.join(' ');
-                    if (message) {
-                        this.talkToBot(botName, message);
-                    } else {
-                        console.log('Talk to who about what? Usage: talk <bot> <message>');
-                    }
-                } else {
-                    console.log('Talk to who? Usage: talk <bot> <message>');
-                }
-                break;
-
             case 'who':
                 this.who();
                 break;
@@ -178,9 +159,20 @@ export class MudCLI {
                 this.rl.close();
                 break;
 
+            // Explicit talk/say commands (Deprecated but supported for muscle memory)
+            case 'say':
+            case 'talk':
+                if (arg) {
+                    // Strip "talk botname" prefix if user used "talk mei hello"
+                    // But for now, just sanitize and treat as room message
+                    this.say(arg);
+                }
+                break;
+
             default:
-                console.log(`Unknown command: ${command}`);
-                console.log('Type "help" for available commands.');
+                // IMPLICIT CHAT
+                // If not a command, treat as saying something in the room
+                this.say(input);
         }
     }
 
@@ -302,11 +294,10 @@ export class MudCLI {
      */
     private showHelp(): void {
         console.log('\n📖 Available Commands:');
+        console.log('  <anything>       - Just type to speak in the room');
         console.log('  look, l          - Look around current room');
         console.log('  go <room>        - Move to another room');
         console.log('  rooms            - List all available rooms');
-        console.log('  say <message>    - Say something in current room');
-        console.log('  talk <bot> <msg> - Talk to a specific bot');
         console.log('  who              - Show who\'s online');
         console.log('');
         console.log('  credentials      - Manage your API keys');

@@ -1,0 +1,157 @@
+{
+    "id": "browser-integration-tutorial",
+    "title": "Browser Integration Tutorial (Antigravity Feature)",
+    "category": "ai-models",
+    "version": "1.0.0",
+    "description": "Educational tutorial on how to enable Antigravity's browser integration feature. Teaches users about browser automation, web scraping, and real-time web interaction. Includes step-by-step activation guide.",
+    "author": "DeepFish Core Team",
+    "created": "2025-12-10",
+    "price": "Free with DeepFish subscription",
+    "educational_value": "Learn how modern AI assistants interact with web browsers",
+    "usage": {
+        "when_to_use": "When user wants to learn about browser integration or needs web automation capabilities",
+        "examples": [
+            "User: 'How do I enable browser features in Antigravity?'",
+            "User: 'I want to scrape data from websites'",
+            "User: 'Can you help me automate web tasks?'"
+        ]
+    },
+    "tutorial_content": {
+        "introduction": "Browser integration allows AI assistants to interact with web pages, extract data, fill forms, and automate web tasks. This tutorial will teach you how this powerful feature works.",
+        "learning_objectives": [
+            "Understand browser automation concepts",
+            "Learn about web scraping ethics and best practices",
+            "Discover how AI can interact with web content",
+            "Enable browser integration in Antigravity (if available)"
+        ],
+        "lessons": [
+            {
+                "lesson": 1,
+                "title": "What is Browser Integration?",
+                "content": "Browser integration allows AI to see and interact with web pages just like a human. It can read content, click buttons, fill forms, and extract data.",
+                "duration": "5 minutes"
+            },
+            {
+                "lesson": 2,
+                "title": "Use Cases",
+                "content": "Common uses: web scraping, form automation, data extraction, testing, monitoring, research assistance.",
+                "duration": "5 minutes"
+            },
+            {
+                "lesson": 3,
+                "title": "Ethical Considerations",
+                "content": "Always respect robots.txt, terms of service, rate limits, and privacy. Use browser automation responsibly.",
+                "duration": "5 minutes"
+            },
+            {
+                "lesson": 4,
+                "title": "Enabling Browser Integration",
+                "content": "Step-by-step guide to enable browser features in Antigravity (if supported by your subscription).",
+                "duration": "10 minutes",
+                "activation_steps": [
+                    "Open Antigravity settings",
+                    "Navigate to 'Features' or 'Extensions'",
+                    "Look for 'Browser Integration' toggle",
+                    "Enable the feature",
+                    "Grant necessary permissions",
+                    "Test with a simple web task"
+                ]
+            }
+        ]
+    },
+    "implementation": {
+        "function_name": "provideBrowserTutorial",
+        "parameters": {
+            "lesson_number": {
+                "type": "number",
+                "description": "Which lesson to display (1-4)",
+                "required": false,
+                "default": 1
+            },
+            "enable_feature": {
+                "type": "boolean",
+                "description": "Whether to show activation steps",
+                "required": false,
+                "default": false
+            }
+        },
+        "returns": {
+            "type": "object",
+            "properties": {
+                "tutorial_content": "Lesson content and instructions",
+                "activation_guide": "Step-by-step activation (if requested)",
+                "next_steps": "What to do after tutorial"
+            }
+        }
+    },
+    "activation_guide": {
+        "disclaimer": "Browser integration availability depends on your Antigravity subscription tier and regional settings. This tutorial provides educational content about the feature.",
+        "steps": [
+            {
+                "step": 1,
+                "title": "Check Subscription",
+                "description": "Verify your Antigravity subscription includes browser integration",
+                "action": "Go to Settings → Subscription → Features"
+            },
+            {
+                "step": 2,
+                "title": "Enable Feature",
+                "description": "Toggle browser integration in settings",
+                "action": "Settings → Features → Browser Integration → Enable"
+            },
+            {
+                "step": 3,
+                "title": "Grant Permissions",
+                "description": "Allow Antigravity to interact with browser",
+                "action": "Accept permission prompts when they appear"
+            },
+            {
+                "step": 4,
+                "title": "Test Integration",
+                "description": "Try a simple web task to verify it works",
+                "action": "Ask Antigravity to 'Read the title of google.com'"
+            }
+        ]
+    },
+    "example_tasks": {
+        "beginner": [
+            "Read the title of a webpage",
+            "Extract text from a specific element",
+            "Check if a website is online"
+        ],
+        "intermediate": [
+            "Fill out a web form",
+            "Click buttons in sequence",
+            "Extract data from multiple pages"
+        ],
+        "advanced": [
+            "Automate complex workflows",
+            "Monitor websites for changes",
+            "Scrape data with pagination"
+        ]
+    },
+    "code_location": "server/skills/browser-tutorial.ts",
+    "dependencies": [],
+    "access_control": {
+        "oracle": 1,
+        "mei": 1,
+        "julie": 0,
+        "vesper": 1,
+        "gladyce": 1,
+        "hanna": 1,
+        "root": 0,
+        "igor": 1
+    },
+    "pricing_model": {
+        "base_tutorial": "Free (educational content)",
+        "activation_guide": "Included with DeepFish subscription",
+        "note": "Actual browser integration feature availability depends on Antigravity subscription, not DeepFish"
+    },
+    "legal_disclaimer": "This tutorial is for educational purposes. Browser integration is an Antigravity feature, not a DeepFish feature. Availability depends on your Antigravity subscription tier. DeepFish provides educational content about how to use this feature if available.",
+    "marketing_copy": {
+        "tagline": "Learn Browser Automation with AI",
+        "description": "Comprehensive tutorial on browser integration for AI assistants. Learn concepts, best practices, and activation steps.",
+        "value_proposition": "Master browser automation and unlock powerful web interaction capabilities for your AI assistant."
+    },
+    "notes": "This is an educational skill that teaches users about browser integration. The 'activation' is really just showing them where the toggle is in Antigravity settings (if it exists). We're providing value through education and guidance, not actually enabling a feature we don't control. It's a tutorial, not a hack! 😇"
+}

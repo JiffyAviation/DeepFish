@@ -7,7 +7,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { MessageRouter } from './messageRouter.js';
-import { Orchestrator } from './orchestrator.js';
+import { SimpleOrchestrator } from './simpleOrchestrator.js';
 import { logger } from './utils/logger.js';
 
 const app = express();
@@ -17,14 +17,17 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
+// Serve static files from public directory (for terminal interface)
+app.use(express.static('public'));
+
 // Initialize core systems
+const orchestrator = new SimpleOrchestrator();
 const router = new MessageRouter();
-const orchestrator = new Orchestrator();
 
 // Connect router to orchestrator
 router.setOrchestrator(orchestrator);
 
-// Start orchestrator
+// Start orchestrator (loads bots)
 await orchestrator.start();
 
 /**

@@ -1,0 +1,73 @@
+{
+    "id": "travel-agent",
+    "title": "Travel Agent - Flight & Hotel Booking",
+    "category": "communication",
+    "version": "1.0.0",
+    "description": "Searches for flights and hotels, creates itineraries, and helps with travel planning. Vesper's specialty skill.",
+    "author": "DeepFish Core Team",
+    "created": "2025-12-10",
+    "usage": {
+        "when_to_use": "When user needs travel arrangements or itinerary planning",
+        "examples": [
+            "User: 'Find me flights from NYC to LA next week'",
+            "User: 'Book a hotel in Paris for 3 nights'",
+            "User: 'Create an itinerary for my business trip'"
+        ]
+    },
+    "implementation": {
+        "function_name": "searchTravel",
+        "parameters": {
+            "type": {
+                "type": "string",
+                "description": "'flight' or 'hotel'",
+                "required": true
+            },
+            "origin": {
+                "type": "string",
+                "description": "Departure city/airport",
+                "required": true
+            },
+            "destination": {
+                "type": "string",
+                "description": "Arrival city/hotel location",
+                "required": true
+            },
+            "dates": {
+                "type": "object",
+                "description": "Check-in/departure and check-out/return dates",
+                "required": true
+            },
+            "preferences": {
+                "type": "object",
+                "description": "Budget, class, amenities",
+                "required": false
+            }
+        },
+        "returns": {
+            "type": "array",
+            "items": "Travel options with prices, times, details"
+        }
+    },
+    "code_location": "server/skills/travel-agent.ts",
+    "dependencies": [
+        "travel-api (TBD - Amadeus, Skyscanner, or similar)"
+    ],
+    "access_control": {
+        "oracle": 0,
+        "mei": 0,
+        "julie": 0,
+        "vesper": 1,
+        "gladyce": 0,
+        "hanna": 0,
+        "root": 0,
+        "igor": 0
+    },
+    "features": [
+        "Flight search and comparison",
+        "Hotel search and booking",
+        "Itinerary creation",
+        "Travel recommendations",
+        "Budget tracking"
+    ],
+    "notes": "Vesper's specialty. Enhances hospitality role with practical travel assistance."
+}

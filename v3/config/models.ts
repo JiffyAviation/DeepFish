@@ -12,11 +12,11 @@ export interface ModelConfig {
 export const MODEL_CONFIGS: Record<string, ModelConfig> = {
     gemini: {
         provider: 'google',
-        openRouterModel: 'google/gemini-2.5-flash',
+        openRouterModel: 'google/gemini-2.0-flash-exp',
         directFallback: [
-            'gemini-2.5-flash',
-            'gemini-2.0-flash',
-            'gemini-pro'
+            'gemini-2.0-flash-exp',
+            'gemini-1.5-flash',
+            'gemini-1.5-pro'
         ],
         apiEndpoint: 'https://generativelanguage.googleapis.com/v1beta'
     },

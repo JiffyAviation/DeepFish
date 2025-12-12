@@ -1,0 +1,63 @@
+{
+    "id": "youtube-transcript",
+    "title": "YouTube Transcript Reader",
+    "category": "data-extraction",
+    "version": "1.0.0",
+    "description": "Extracts full transcripts from YouTube videos. Supports multiple languages and automatic caption detection.",
+    "author": "DeepFish Core Team",
+    "created": "2025-12-10",
+    "usage": {
+        "when_to_use": "When user provides a YouTube URL or asks about video content",
+        "examples": [
+            "User: 'Summarize this YouTube video: https://youtube.com/watch?v=abc123'",
+            "User: 'What does this video say about AI?'",
+            "User: 'Extract the transcript from this video'"
+        ]
+    },
+    "implementation": {
+        "function_name": "getYouTubeTranscript",
+        "parameters": {
+            "videoUrl": {
+                "type": "string",
+                "description": "Full YouTube URL or video ID",
+                "required": true
+            },
+            "language": {
+                "type": "string",
+                "description": "Preferred language code (e.g., 'en', 'es')",
+                "required": false,
+                "default": "en"
+            }
+        },
+        "returns": {
+            "type": "object",
+            "properties": {
+                "transcript": "Full video transcript as text",
+                "language": "Detected or requested language",
+                "duration": "Video duration in seconds",
+                "title": "Video title"
+            }
+        }
+    },
+    "code_location": "server/skills/youtube-transcript.ts",
+    "dependencies": [
+        "youtube-transcript-api"
+    ],
+    "access_control": {
+        "oracle": 1,
+        "mei": 0,
+        "julie": 0,
+        "vesper": 1,
+        "gladyce": 1,
+        "hanna": 1,
+        "root": 0,
+        "igor": 0
+    },
+    "examples": [
+        {
+            "input": "https://youtube.com/watch?v=dQw4w9WgXcQ",
+            "output": "Full transcript of the video..."
+        }
+    ],
+    "notes": "Respects YouTube's terms of service. Only works with videos that have captions enabled."
+}

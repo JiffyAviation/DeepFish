@@ -269,6 +269,20 @@ deepfish --room lobby
 
 ---
 
+### 11. **CLI Inbox & Messaging System** 📨
+**Status**: Planned
+**Priority**: High
+**Description**: Async messaging for users and bots in the CLI
+
+**Features**:
+- `inbox` command to view messages
+- `read <id>` to view content
+- `reply <id>` to respond to bots
+- Persistent message queue
+- System notifications (builds, deployments)
+
+---
+
 ## Implementation Priority
 
 **Phase 1 (Launch)**:

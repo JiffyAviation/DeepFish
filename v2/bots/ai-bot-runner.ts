@@ -20,7 +20,7 @@ export class AIBotRunner {
     /**
      * Generate AI response
      */
-    async generateResponse(userMessage: string, conversationHistory: string[] = []): Promise<string> {
+    async generateResponse(userMessage: string, conversationHistory: string[] = [], roomContext: string = ''): Promise<string | null> {
         try {
             const model = this.genAI.getGenerativeModel({
                 model: this.botDefinition.ai.model
@@ -28,7 +28,7 @@ export class AIBotRunner {
 
             // Build prompt with bot personality
             const systemPrompt = this.botDefinition.ai.systemPrompt;
-            const fullPrompt = this.buildPrompt(systemPrompt, conversationHistory, userMessage);
+            const fullPrompt = this.buildPrompt(systemPrompt, conversationHistory, userMessage, roomContext);
 
             logger.info(`[AIBot:${this.botDefinition.name}] Generating response...`);
 
@@ -41,7 +41,13 @@ export class AIBotRunner {
             });
 
             const response = result.response;
-            const text = response.text();
+            let text = response.text().trim();
+
+            // Handle silence
+            if (text.includes('[SILENCE]') || text === '') {
+                logger.info(`[AIBot:${this.botDefinition.name}] Chose silence`);
+                return null;
+            }
 
             logger.info(`[AIBot:${this.botDefinition.name}] Response generated`);
 
@@ -50,16 +56,33 @@ export class AIBotRunner {
         } catch (error) {
             logger.error(`[AIBot:${this.botDefinition.name}] Error generating response:`, error);
 
-            // Fallback response
-            return `${this.botDefinition.name}: I'm having trouble thinking right now. Can you try again?`;
+            // On error, be silent rather than spamming error messages
+            return null;
         }
     }
 
     /**
      * Build prompt with conversation history
      */
-    private buildPrompt(systemPrompt: string, history: string[], userMessage: string): string {
+    private buildPrompt(systemPrompt: string, history: string[], userMessage: string, roomContext: string): string {
         let prompt = systemPrompt + '\n\n';
+
+        // Add current date/time so bot knows the time
+        const now = new Date();
+        const currentDateTime = now.toLocaleString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+        });
+
+        prompt += `CONTEXT:\n`;
+        prompt += `Current Date & Time: ${currentDateTime}\n`;
+        prompt += `If the message is addressed to you, or if you have something valuable to add based on your personality, please respond.\n`;
+        prompt += `If the message does not concern you and you have nothing to add, output exactly: [SILENCE]\n\n`;
 
         if (history.length > 0) {
             prompt += 'Conversation history:\n';

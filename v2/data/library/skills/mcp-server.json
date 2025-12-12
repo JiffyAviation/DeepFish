@@ -1,0 +1,124 @@
+{
+    "id": "mcp-server",
+    "title": "MCP Server - IDE Integration",
+    "category": "infrastructure",
+    "version": "1.0.0",
+    "description": "Model Context Protocol server that exposes DeepFish bots to any MCP-compatible IDE (Antigravity, VSCode with extensions, Claude Desktop, Cursor, etc.). Enables chat in sidebar with direct code editing.",
+    "author": "DeepFish Core Team",
+    "created": "2025-12-10",
+    "usage": {
+        "when_to_use": "Automatically enabled when user connects DeepFish to their IDE",
+        "examples": [
+            "User opens Antigravity → DeepFish bots appear in sidebar",
+            "User opens VSCode with MCP extension → DeepFish available",
+            "User chats with @hanna → Code appears in editor automatically"
+        ]
+    },
+    "implementation": {
+        "function_name": "startMCPServer",
+        "parameters": {
+            "transport": {
+                "type": "string",
+                "description": "'stdio' for local, 'sse' for remote",
+                "required": true,
+                "default": "stdio"
+            }
+        },
+        "returns": {
+            "type": "object",
+            "properties": {
+                "server": "Running MCP server instance",
+                "tools": "List of available bot tools",
+                "resources": "Available resources"
+            }
+        }
+    },
+    "supported_ides": [
+        "Antigravity (Google)",
+        "VSCode (with MCP extension)",
+        "Cursor (built-in MCP)",
+        "Claude Desktop (Anthropic)",
+        "Any MCP-compatible editor"
+    ],
+    "bot_tools_exposed": [
+        "oracle - System Architect",
+        "mei - Project Manager",
+        "julie - CFO",
+        "vesper - Hospitality/UX",
+        "gladyce - R&D Engineer",
+        "hanna - Creative Director",
+        "root - System Admin",
+        "igor - DevOps"
+    ],
+    "capabilities": [
+        "Chat with bots in IDE sidebar",
+        "Direct file editing",
+        "Multi-file operations",
+        "Artifact extraction",
+        "Code generation",
+        "Document creation"
+    ],
+    "code_location": "server/mcp/",
+    "dependencies": [
+        "@modelcontextprotocol/sdk"
+    ],
+    "access_control": {
+        "oracle": 1,
+        "mei": 1,
+        "julie": 1,
+        "vesper": 1,
+        "gladyce": 1,
+        "hanna": 1,
+        "root": 1,
+        "igor": 1
+    },
+    "configuration": {
+        "antigravity": {
+            "file": "~/.config/antigravity/mcp.json",
+            "config": {
+                "mcpServers": {
+                    "deepfish": {
+                        "command": "node",
+                        "args": [
+                            "path/to/DeepFish/v2/server/mcp/server.js"
+                        ]
+                    }
+                }
+            }
+        },
+        "vscode": {
+            "file": "~/.vscode/mcp.json",
+            "config": {
+                "mcpServers": {
+                    "deepfish": {
+                        "command": "node",
+                        "args": [
+                            "path/to/DeepFish/v2/server/mcp/server.js"
+                        ]
+                    }
+                }
+            }
+        },
+        "cursor": {
+            "file": "~/.cursor/mcp.json",
+            "config": {
+                "mcpServers": {
+                    "deepfish": {
+                        "command": "node",
+                        "args": [
+                            "path/to/DeepFish/v2/server/mcp/server.js"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "user_experience": {
+        "in_sidebar": "User sees DeepFish bots as available tools",
+        "chat": "User types @oracle or @hanna to chat with specific bot",
+        "code_editing": "Bot generates code, appears in editor automatically",
+        "file_operations": "Bot can read/write files directly",
+        "artifacts": "Code, documents, configs extracted as artifacts"
+    },
+    "notes": "Universal skill - works with ANY MCP-compatible IDE. One implementation, works everywhere. This is THE way to integrate DeepFish with developer tools."
+}

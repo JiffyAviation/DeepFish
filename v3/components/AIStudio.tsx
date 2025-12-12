@@ -10,7 +10,7 @@ import { addMessageWithLimit } from '../utils/messageBuffer';
 import { sendMessageToAgent } from '../services/apiService';
 
 const AIStudio = () => {
-    const [activeRoomId, setActiveRoomId] = useState<string>('main');
+    const [activeRoomId, setActiveRoomId] = useState<string>(ROOMS[0].id);
     const [activeAgentId, setActiveAgentId] = useState<string>(AgentId.MEI);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -64,9 +64,11 @@ const AIStudio = () => {
         abortControllerRef.current = abortController;
 
         try {
+            // Safety check: ensure we have a valid array
+            const currentHistory = roomMessages[targetRoomId] || [];
             const { text } = await sendMessageToAgent(
-                [...roomMessages[targetRoomId], userMessage],
-                activeAgent.systemPrompt,
+                [...currentHistory, userMessage],
+                activeAgent.basePrompt,
                 'gemini-2.0-flash-exp',
                 activeAgent.id
             );
@@ -97,7 +99,7 @@ const AIStudio = () => {
             const errorMessage: Message = {
                 id: generateId(),
                 role: Role.MODEL,
-                text: 'Sorry, there was an error processing your request.',
+                text: `Sorry, there was an error processing your request.\n\nDebug Info: ${error.message || 'Unknown error'}`,
                 timestamp: new Date(),
                 isError: true
             };

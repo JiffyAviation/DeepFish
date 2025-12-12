@@ -1,0 +1,14 @@
+{
+    "mcpServers": {
+        "deepfish": {
+            "command": "cmd.exe",
+            "args": [
+                "/c",
+                "cd /d c:\\Users\\Irene\\OneDrive\\Documents\\GitHub\\DeepFish\\v2 && npm run mcp"
+            ],
+            "env": {
+                "PATH": "C:\\Python314\\Scripts\\;C:\\Python314\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\NVIDIA Corporation\\NVIDIA App\\NvDLISR;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\Git\\cmd;C:\\Program Files\\nodejs\\;C:\\ProgramData\\chocolatey\\bin;C:\\Users\\Irene\\AppData\\Local\\Microsoft\\WindowsApps;C:\\ProgramData\\Irene\\GitHubDesktop\\bin;C:\\Users\\Irene\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\Irene\\AppData\\Local\\Programs\\Antigravity\\bin;C:\\Users\\Irene\\AppData\\Roaming\\npm;c:\\Users\\Irene\\.antigravity\\extensions\\ms-python.debugpy-2025.14.1-win32-x64\\bundled\\scripts\\noConfigScripts"
+            }
+        }
+    }
+}

@@ -25,7 +25,7 @@ export interface SpecialistResponse {
 export const sendMessageToAgent = async (
     history: Message[],
     systemInstruction: string,
-    modelName: string = "gemini-1.5-flash-latest",
+    modelName: string = "gemini-2.0-flash-exp",
     agentId: string,
     tools?: any[]
 ): Promise<AgentResponse> => {

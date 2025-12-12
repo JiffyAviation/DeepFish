@@ -25,7 +25,7 @@
 3. **Deploy**
    - Railway will auto-detect Node.js
    - Build command: `npm install && npm run build`
-   - Start command: `npm run dev`
+   - Start command: `npm start`
 
 4. **Get Deployment URL**
    - Railway provides: `https://your-app.up.railway.app`

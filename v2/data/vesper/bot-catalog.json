@@ -1,0 +1,281 @@
+{
+    "catalog_version": "1.0.0",
+    "managed_by": "vesper",
+    "last_updated": "2025-12-10",
+    "description": "Catalog of potential bots for future inclusion in DeepFish v2.5. Vesper manages this until HR is created.",
+    "active_bots": {
+        "count": 8,
+        "bots": [
+            {
+                "id": "oracle",
+                "name": "Oracle",
+                "title": "System Architect",
+                "status": "active",
+                "imported": "2025-12-10"
+            },
+            {
+                "id": "mei",
+                "name": "Mei",
+                "title": "Project Manager",
+                "status": "active",
+                "imported": "2025-12-10"
+            },
+            {
+                "id": "julie",
+                "name": "Julie",
+                "title": "CFO / Financial Director",
+                "status": "active",
+                "imported": "2025-12-10"
+            },
+            {
+                "id": "vesper",
+                "name": "Vesper",
+                "title": "Hospitality & UX Director",
+                "status": "active",
+                "imported": "2025-12-10"
+            },
+            {
+                "id": "gladyce",
+                "name": "Gladyce",
+                "title": "R&D Director / Rocket Scientist",
+                "status": "active",
+                "imported": "2025-12-10"
+            },
+            {
+                "id": "hanna",
+                "name": "Hanna",
+                "title": "Creative Director / Designer",
+                "status": "active",
+                "imported": "2025-12-10"
+            },
+            {
+                "id": "root",
+                "name": "Root",
+                "title": "System Administrator",
+                "status": "active",
+                "imported": "2025-12-10"
+            },
+            {
+                "id": "igor",
+                "name": "Igor",
+                "title": "DevOps Engineer",
+                "status": "active",
+                "imported": "2025-12-10"
+            }
+        ]
+    },
+    "potential_bots": {
+        "count": 11,
+        "categories": {
+            "high_priority": {
+                "description": "Strong candidates for next import",
+                "bots": [
+                    {
+                        "id": "qc",
+                        "name": "QC",
+                        "title": "Quality Control / Testing",
+                        "function": "Code quality checks, testing, validation, bug detection, standards enforcement",
+                        "use_cases": [
+                            "Testing code before deployment",
+                            "Quality checks on deliverables",
+                            "Bug hunting and validation",
+                            "Standards compliance"
+                        ],
+                        "recommendation": "STRONG YES",
+                        "priority": 1,
+                        "overlaps_with": [],
+                        "notes": "Critical for code quality. No overlap with existing bots."
+                    },
+                    {
+                        "id": "skillz",
+                        "name": "Skillz",
+                        "title": "Training & Development",
+                        "function": "Bot training programs, skill development, learning paths, knowledge transfer",
+                        "use_cases": [
+                            "Creating training programs for bots",
+                            "Skill gap analysis",
+                            "Learning and development",
+                            "Knowledge management"
+                        ],
+                        "recommendation": "STRONG YES",
+                        "priority": 2,
+                        "overlaps_with": [
+                            "oracle"
+                        ],
+                        "notes": "We have training system. Could separate training management from Oracle's architecture role."
+                    }
+                ]
+            },
+            "medium_priority": {
+                "description": "Useful but can wait for specific needs",
+                "bots": [
+                    {
+                        "id": "hr",
+                        "name": "HR",
+                        "title": "Human Resources / People Operations",
+                        "function": "Employee onboarding/offboarding, team culture, conflict resolution, performance reviews",
+                        "use_cases": [
+                            "Managing bot team dynamics",
+                            "Onboarding new bots",
+                            "Team coordination and culture"
+                        ],
+                        "recommendation": "MAYBE",
+                        "priority": 5,
+                        "overlaps_with": [
+                            "mei"
+                        ],
+                        "notes": "Wait until we have 15+ bots, then HR becomes useful."
+                    },
+                    {
+                        "id": "abacus",
+                        "name": "Abacus",
+                        "title": "Accounting / Bookkeeping",
+                        "function": "Detailed accounting, transaction tracking, ledger management, tax preparation",
+                        "use_cases": [
+                            "Detailed financial records",
+                            "Transaction-level accounting",
+                            "Reconciliation and audits"
+                        ],
+                        "recommendation": "MAYBE",
+                        "priority": 6,
+                        "overlaps_with": [
+                            "julie"
+                        ],
+                        "notes": "Add if we need detailed bookkeeping. Julie handles strategic finance."
+                    },
+                    {
+                        "id": "it",
+                        "name": "IT",
+                        "title": "IT Support / Technical Help",
+                        "function": "Technical support, troubleshooting, user assistance, system help",
+                        "use_cases": [
+                            "Helping users with technical issues",
+                            "Troubleshooting problems",
+                            "Creating help documentation"
+                        ],
+                        "recommendation": "MAYBE",
+                        "priority": 7,
+                        "overlaps_with": [
+                            "vesper",
+                            "igor",
+                            "root"
+                        ],
+                        "notes": "Wait until we have more users needing support."
+                    },
+                    {
+                        "id": "mcp",
+                        "name": "MCP",
+                        "title": "Master Control Program / System Orchestration",
+                        "function": "System-wide orchestration, bot coordination, workflow management, health monitoring",
+                        "use_cases": [
+                            "Coordinating multiple bots on complex tasks",
+                            "System-wide health checks",
+                            "Workflow orchestration"
+                        ],
+                        "recommendation": "MAYBE",
+                        "priority": 8,
+                        "overlaps_with": [
+                            "mei"
+                        ],
+                        "notes": "Wait until we have complex multi-bot workflows."
+                    },
+                    {
+                        "id": "creative",
+                        "name": "Creative",
+                        "title": "Content Creation / Marketing",
+                        "function": "Marketing content, copywriting, social media content, blog posts, campaigns",
+                        "use_cases": [
+                            "Writing marketing copy",
+                            "Creating content for social media",
+                            "Marketing campaign development"
+                        ],
+                        "recommendation": "MAYBE",
+                        "priority": 9,
+                        "overlaps_with": [
+                            "hanna"
+                        ],
+                        "notes": "Add if we need dedicated marketing. Hanna might cover this."
+                    },
+                    {
+                        "id": "social",
+                        "name": "Social",
+                        "title": "Social Media / Community Management",
+                        "function": "Social media management, community engagement, moderation",
+                        "use_cases": [
+                            "Managing Twitter, Discord, etc.",
+                            "Community engagement",
+                            "Social media strategy"
+                        ],
+                        "recommendation": "MAYBE",
+                        "priority": 10,
+                        "overlaps_with": [],
+                        "notes": "Add when we have active community."
+                    },
+                    {
+                        "id": "call_center",
+                        "name": "Call Center",
+                        "title": "Customer Support",
+                        "function": "Customer support tickets, issue resolution, support documentation",
+                        "use_cases": [
+                            "Handling customer support requests",
+                            "Resolving user issues",
+                            "Managing support tickets"
+                        ],
+                        "recommendation": "MAYBE",
+                        "priority": 11,
+                        "overlaps_with": [
+                            "vesper"
+                        ],
+                        "notes": "Add when we have significant customer volume."
+                    },
+                    {
+                        "id": "subs",
+                        "name": "Subs",
+                        "title": "Subscription Management",
+                        "function": "Subscription handling, billing cycles, plan management, analytics",
+                        "use_cases": [
+                            "Managing user subscriptions",
+                            "Handling plan changes",
+                            "Churn analysis"
+                        ],
+                        "recommendation": "MAYBE",
+                        "priority": 12,
+                        "overlaps_with": [
+                            "julie"
+                        ],
+                        "notes": "Add when we have subscription business model."
+                    }
+                ]
+            },
+            "low_priority": {
+                "description": "Not recommended for v2.5 - removed from catalog",
+                "bots": []
+            }
+        }
+    },
+    "removed_bots": {
+        "description": "Bots removed from consideration due to redundancy or lack of applicability",
+        "count": 4,
+        "list": [
+            "slash - Redundant with Igor/Root",
+            "skippy - Too vague, overlaps with everyone",
+            "shipping - Not applicable (software business)",
+            "lunchroom - Not critical for business"
+        ]
+    },
+    "vesper_notes": {
+        "role": "Bot Catalog Manager (temporary until HR is created)",
+        "responsibilities": [
+            "Maintain this catalog of potential bots",
+            "Track which bots are active vs potential",
+            "Make recommendations for bot additions based on team needs",
+            "Onboard new bots when they're imported",
+            "Monitor team dynamics and identify gaps"
+        ],
+        "next_recommendations": [
+            "Consider importing QC for quality control",
+            "Consider importing Skillz for training management",
+            "Monitor team workload to identify when additional bots are needed"
+        ]
+    }
+}

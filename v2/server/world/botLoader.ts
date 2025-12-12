@@ -9,6 +9,7 @@ import { Socketable } from '../utils/socketable.js';
 import { logger } from '../utils/logger.js';
 import { BotDefinitionSchema, validateData } from '../utils/schemas.js';
 import { AIBotRunner } from '../../bots/ai-bot-runner.js';
+import { eventBus } from '../utils/eventBus.js';
 
 export interface BotDefinition {
     id: string;
@@ -48,30 +49,46 @@ export class Bot extends Socketable {
         this.currentRoom = definition.location.defaultRoom;
         this.aiRunner = new AIBotRunner(definition);
 
-        // Subscribe to bot-specific events
+        // Subscribe to events
         this.subscribeToSelf('user:talk', (event) => this.handleTalk(event.data));
         this.subscribeToSelf('user:examine', (event) => this.handleExamine(event.data));
+
+        // Listen to room chatter
+        eventBus.subscribe('user:say', (event) => this.handleRoomMessage(event.data));
 
         logger.info(`[Bot] ${this.name} loaded`);
     }
 
     /**
-     * Handle user talking to this bot
+     * Handle room message (implicit chat)
      */
-    private async handleTalk(data: any): Promise<void> {
-        const { userId, message } = data;
+    private async handleRoomMessage(data: any): Promise<void> {
+        const { userId, message, roomId } = data;
 
-        logger.info(`[Bot:${this.name}] ${userId} says: ${message}`);
+        // Ignore messages not in my room
+        if (roomId !== this.currentRoom) return;
+
+        // Ignore my own messages (if bots talk to each other later)
+        if (userId === this.id) return;
+
+        logger.info(`[Bot:${this.name}] Hearing ${userId} in ${roomId}...`);
 
         try {
-            // Get AI response
-            const response = await this.aiRunner.generateResponse(message, this.conversationHistory);
+            // Get AI response with room context
+            const response = await this.aiRunner.generateResponse(
+                message,
+                this.conversationHistory,
+                roomId // Pass room context
+            );
+
+            // If AI chose to be silent, do nothing
+            if (!response) return;
 
             // Update conversation history
-            this.conversationHistory.push(`User: ${message}`);
+            this.conversationHistory.push(`${userId}: ${message}`);
             this.conversationHistory.push(`${this.name}: ${response}`);
 
-            // Keep history manageable (last 10 messages)
+            // Keep history manageable
             if (this.conversationHistory.length > 20) {
                 this.conversationHistory = this.conversationHistory.slice(-20);
             }
@@ -79,21 +96,49 @@ export class Bot extends Socketable {
             // Emit response
             this.emit('bot:response', {
                 botId: this.id,
-                userId,
+                userId, // Reply to the speaker
                 text: response,
                 emote: this.definition.personality.emotes.happy
             });
 
         } catch (error) {
-            logger.error(`[Bot:${this.name}] Error generating response:`, error);
+            logger.error(`[Bot:${this.name}] Error processing room message:`, error);
+        }
+    }
 
-            // Fallback response
-            this.emit('bot:response', {
-                botId: this.id,
-                userId,
-                text: `${this.name}: I'm having trouble thinking right now. Can you try again?`,
-                emote: this.definition.personality.emotes.thinking
-            });
+    /**
+     * Handle direct user talk (Legacy/Direct)
+     */
+    private async handleTalk(data: any): Promise<void> {
+        const { userId, message } = data;
+
+        logger.info(`[Bot:${this.name}] ${userId} talks directly: ${message}`);
+
+        try {
+            // Force a response for direct talk (no silence allowed)
+            const response = await this.aiRunner.generateResponse(message, this.conversationHistory);
+
+            if (response) {
+                this.conversationHistory.push(`User: ${message}`);
+                this.conversationHistory.push(`${this.name}: ${response}`);
+
+                this.emit('bot:response', {
+                    botId: this.id,
+                    userId,
+                    text: response,
+                    emote: this.definition.personality.emotes.happy
+                });
+            } else {
+                this.emit('bot:response', {
+                    botId: this.id,
+                    userId,
+                    text: "*stares blankly*",
+                    emote: 'confused'
+                });
+            }
+
+        } catch (error) {
+            logger.error(`[Bot:${this.name}] Error generating response:`, error);
         }
     }
 

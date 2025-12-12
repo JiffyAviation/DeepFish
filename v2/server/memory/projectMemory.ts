@@ -1,26 +1,34 @@
 /**
- * Project Memory System - Persistent Agentic Memory
- * Enables bots to remember project context across sessions
+ * Project Memory Manager
+ * Manages persistent memory for multi-day projects using compact notation
  */
 
-import { readFile, writeFile, appendFile, mkdir } from 'fs/promises';
+import { writeFile, readFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { logger } from '../utils/logger.js';
 
-// Compact notation types
+// Compact notation for space efficiency
 export interface Feature {
-    i: string;      // id (short)
-    s: 'P' | 'F' | 'W' | 'Q' | 'B' | 'S';  // status (Passing/Failing/Working/Queued/Blocked/Skipped)
-    a: string;      // assigned bot
-    t: number;      // timestamp
-    n?: string;     // notes (optional)
+    i: string;  // id
+    a: string;  // assignedTo (bot)
+    s: 'P' | 'F' | 'W';  // status: Passing, Failing, Working
+    t: number;  // timestamp
+}
+
+export interface ProjectMetadata {
+    id: string;
+    created: number;
+    keywords: string[];  // NEW: Keywords for memory matching
+    description: string; // NEW: Human-readable description
+    domain: string;      // NEW: Project domain (e.g., "aerospace", "web", "finance")
+    priority: 'A' | 'B' | 'C' | 'D';  // NEW: Priority level
+    priorityUpdated: number;  // NEW: When priority was last set
 }
 
 export interface ProjectFeatures {
-    p: string;      // project id
-    created: number;
-    f: Feature[];   // features array
+    metadata: ProjectMetadata;
+    f: Feature[];  // features
 }
 
 export interface TestResult {

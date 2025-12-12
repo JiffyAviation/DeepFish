@@ -14,7 +14,7 @@ export async function sendMessage(
 ): Promise<string> {
   try {
     const model = ai.getGenerativeModel({
-      model: "gemini-1.5-flash-latest",
+      model: "gemini-2.0-flash-exp",
       systemInstruction: systemPrompt
     });
 

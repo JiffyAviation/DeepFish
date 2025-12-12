@@ -5,16 +5,19 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:server": "tsx watch server/main.ts",
+    "dev:server": "tsx watch server/index.ts",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:server\"",
     "build": "tsc -b && vite build",
-    "start": "node --import tsx server/main.ts",
+    "start": "node --import tsx server/index.ts",
+    "mcp": "tsx server/mcp/server.ts",
     "cli": "tsx cli.ts",
     "test:fire-drill": "tsx test-fire-sprinklers.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",
     "@google/generative-ai": "^0.21.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "chalk": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

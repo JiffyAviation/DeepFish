@@ -275,7 +275,7 @@ To have a "Whole-Screen App" accessible via a static URL on any device, we need 
           `;
 
       try {
-        const result = await sendMessageToAgent([], prompt, agent.model || 'gemini-2.5-flash', targetAgentId);
+        const result = await sendMessageToAgent([], prompt, agent.model || 'gemini-2.0-flash-exp', targetAgentId);
 
         const agentMsg: MemoMessage = {
           id: crypto.randomUUID(),
@@ -406,7 +406,7 @@ To have a "Whole-Screen App" accessible via a static URL on any device, we need 
       let response = await sendMessageToAgent(
         historyToUse,
         systemInstruction,
-        activeAgent.model || 'gemini-2.5-flash',
+        activeAgent.model || 'gemini-2.0-flash-exp',
         activeAgentId
       );
 
@@ -453,7 +453,7 @@ To have a "Whole-Screen App" accessible via a static URL on any device, we need 
               subAgent.basePrompt + (subAgent.customInstructions || ""),
               task_description,
               context_summary,
-              subAgent.model || 'gemini-2.5-flash'
+              subAgent.model || 'gemini-2.0-flash-exp'
             );
 
             // ASSET BUS: Capture Output Images
@@ -496,7 +496,7 @@ To have a "Whole-Screen App" accessible via a static URL on any device, we need 
             response = await sendMessageToAgent(
               historyToUse,
               systemInstruction,
-              activeAgent.model || 'gemini-2.5-flash',
+              activeAgent.model || 'gemini-2.0-flash-exp',
               activeAgentId
             );
           }

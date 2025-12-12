@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>DeepFish Terminal</title>
+    <link rel="stylesheet" href="terminal.css">
+    <link rel="stylesheet" href="viewer.css">
+</head>
+
+<body>
+    <div class="crt-container">
+        <!-- CRT Screen Effect -->
+        <div class="crt-screen">
+            <!-- Terminal Output Box -->
+            <div class="terminal-box">
+                <div class="terminal-output" id="output">
+                    <div class="boot-text">
+                        <span class="prompt">DeepFish v2 Natural Language Interface</span><br>
+                        <span class="dim">Initializing bot system...</span><br>
+                        <span class="success">✓ 8 bots loaded</span><br>
+                        <span class="dim">Just type naturally to chat with any bot</span><br>
+                        <span class="dim">Example: "Hey Mei, can you help plan this project?"</span><br>
+                        <br>
+                    </div>
+                </div>
+                <div class="terminal-input-line">
+                    <span class="prompt">&gt;</span>
+                    <span class="input-text" id="input-text"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+
+            <!-- Grid Background -->
+            <div class="grid-background"></div>
+        </div>
+
+        <!-- Scanlines Effect -->
+        <div class="scanlines"></div>
+
+        <!-- CRT Flicker -->
+        <div class="crt-flicker"></div>
+    </div>
+
+    <!-- Hidden Input for Mobile Keyboard -->
+    <input type="text" id="hidden-input" class="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off">
+
+    <!-- Document Viewer Overlay -->
+    <div class="document-viewer" id="document-viewer">
+        <div class="document-header">
+            <span class="document-title" id="document-title">Document</span>
+            <button class="document-close" id="close-viewer">ESC / CLOSE</button>
+        </div>
+        <div class="document-content" id="document-content">
+            <!-- Document will be loaded here -->
+        </div>
+    </div>
+
+    <script src="terminal.js"></script>
+</body>
+
+</html>
